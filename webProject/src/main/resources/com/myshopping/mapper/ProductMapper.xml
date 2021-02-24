@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myshopping.mapper.ProductMapper">
+	
+	<select id="getList" resultType="com.myshopping.domain.ProductVO">
+	<![CDATA[
+		select * from tbl_product where product_code > 0
+	]]>
+	</select>
+	
+	<insert id="insert">
+		insert into tbl_product (PRODUCT_CODE, PRODUCT_CTGR, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_EXPLAIN, PRODUCT_STOCK, PRODUCT_SALES)
+		values (seq_product.nextval, #{product_ctgr}, #{product_name}, #{product_price}, #{product_explain}, #{product_stock}, #{product_sales})
+	</insert>
+	
+	<select id="read" resultType="com.myshopping.domain.ProductVO">
+		select * from tbl_product where product_code = #{product_code}
+	</select>
+	
+	<select id="readCategori" resultType="com.myshopping.domain.ProductVO">
+		select * from tbl_product where product_ctgr = #{product_ctgr}
+	</select>
+	
+	<select id="readBestProduct" resultType="com.myshopping.domain.ProductVO">
+		<![CDATA[
+		SELECT * FROM (SELECT * FROM TBL_PRODUCT WHERE PRODUCT_CTGR = #{product_code} ORDER BY PRODUCT_SALES DESC) WHERE ROWNUM <= 5
+		]]>
+	</select>
+	
+	<delete id="delete">
+		delete from tbl_product where product_code = #{product_code}
+	</delete>
+	
+	<update id="update">
+		update tbl_product
+		set PRODUCT_CTGR = #{product_ctgr},
+		PRODUCT_NAME = #{product_name},
+		PRODUCT_PRICE = #{product_price},
+		PRODUCT_EXPLAIN = #{product_explain},
+		PRODUCT_STOCK = #{product_stock},
+		PRODUCT_SALES = #{product_sales}
+		where product_code = #{product_code}
+	</update>
+</mapper>
