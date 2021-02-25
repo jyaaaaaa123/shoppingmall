@@ -25,25 +25,6 @@
 		</nav>
 
 		<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-			<h2>인기상품</h2>
-			<div class="row">
-				<c:forEach var="best" items="${best}">
-				<div class="col-lg-2">
-					<svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img"
-						aria-label="Placeholder: 140x140"
-						preserveAspectRatio="xMidYMid slice" focusable="false">
-						<title>Placeholder</title><rect width="100%" height="100%"
-							fill="#777" />
-						<text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
-					<h2><c:out value="${best.product_name}" /></h2>
-					<p><c:out value="${best.product_explain}" /></p>
-					<p>
-						<a class="btn btn-secondary" href="/product/selectProduct?product_code=${best.product_code}">자세히보기 &raquo;</a>
-					</p>
-				</div>
-				</c:forEach>
-			</div>
-			<!-- /.row -->
 			<div class="row">
 				<ul class="nav nav-tabs">
 					<li class="nav-item">

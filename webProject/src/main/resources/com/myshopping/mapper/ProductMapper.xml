@@ -29,6 +29,12 @@
 		]]>
 	</select>
 	
+	<select id="readBestProductHome" resultType="com.myshopping.domain.ProductVO">
+		<![CDATA[
+		SELECT * FROM (SELECT * FROM TBL_PRODUCT  ORDER BY PRODUCT_SALES DESC) WHERE ROWNUM <= 5
+		]]>
+	</select>
+	
 	<delete id="delete">
 		delete from tbl_product where product_code = #{product_code}
 	</delete>

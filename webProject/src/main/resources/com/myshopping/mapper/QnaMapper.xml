@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myshopping.mapper.QnaMapper">
+
+	<select id="readList" resultType="com.myshopping.domain.QnaVO">
+		select * from tbl_qna where userid = #{userid}		
+	</select>
+	
+	<insert id="insert">
+		insert into tbl_qna (qna_code, qna_title, qna_content, userid)
+		values (seq_qna.nextval, #{qna_title}, #{qna_content}, #{userid})
+	</insert>
+	
+	<select id="insert" resultType="com.myshopping.domain.QnaVO">
+		select * from tbl_qna where qna_code = #{qna_code}
+	</select>
+	
+	<update id="update">
+		update tbl_qna
+		set qna_title = #{qna_title},
+		qna_content = #{qna_content},
+		qna_date = sysdate
+		where qna_code = #{qna_code}
+	</update>
+	
+	<delete id="delete">
+		delete from tbl_qna where qna_code = #{qna_code}
+	</delete>
+</mapper>

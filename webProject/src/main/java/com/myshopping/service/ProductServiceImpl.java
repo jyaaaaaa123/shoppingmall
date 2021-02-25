@@ -37,7 +37,12 @@ public class ProductServiceImpl implements ProductService {
 	public boolean remove(Long product_code) {
 		return mapper.delete(product_code) == 1;
 	}
-
+	
+	@Override
+	public List<ProductVO> getBestListHome() {
+		return mapper.readBestProductHome();
+	}
+	
 	@Override
 	public List<ProductVO> getCtgrList(String product_ctgr) {
 		return mapper.readCategori(product_ctgr);
@@ -47,5 +52,7 @@ public class ProductServiceImpl implements ProductService {
 	public List<ProductVO> getBestList(String product_ctgr) {
 		return mapper.readBestProduct(product_ctgr);
 	}
+
+	
 
 }

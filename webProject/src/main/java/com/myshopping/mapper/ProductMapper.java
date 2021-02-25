@@ -21,6 +21,8 @@ public interface ProductMapper {
 	//인기상품 조회
 	public List<ProductVO> readBestProduct(String product_ctgr);
 	
+	public List<ProductVO> readBestProductHome();
+	
 	//삭제완료시 1, 없을시 0
 	public int delete(Long product_code);
 	
