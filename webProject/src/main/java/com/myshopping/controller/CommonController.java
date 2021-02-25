@@ -27,8 +27,5 @@ public class CommonController {
 		}
 	}
 	
-	@GetMapping("/member/logout")
-	public void logoutGET() {
-		
-	}
+	
 }

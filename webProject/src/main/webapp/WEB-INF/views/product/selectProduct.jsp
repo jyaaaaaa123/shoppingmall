@@ -51,7 +51,7 @@
         </div>
     </div>
     <div class="row">
-    	<h5>후기</h5><br>
+    	<h3>상품 후기</h3><br>
         <div class="col-10">
             <div class="table-responsive">
                 <table class="table table-striped table-sm">
@@ -74,8 +74,10 @@
                     </tr>
                   </tbody>
                 </table>
-        </div>
-    </div>
-    </main>
+        	</div>
+	    </div>
+	    </div>
+    	</main>
+	</div>
 </div>
 <%@ include file="../includes/footer.jsp"%>

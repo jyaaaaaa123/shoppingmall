@@ -22,11 +22,25 @@
 		<result property="auth" column="auth"/>
 	</resultMap>
 	
-	<select id="read" resultMap="memberMap">
+	<select id="readUser" resultMap="memberMap">
 		SELECT
 			mem.userid, userpw, username, userphone, useremail, enabled, regdate, updatedate, auth
 		FROM
 			tbl_member mem LEFT OUTER JOIN tbl_member_auth auth on mem.userid = auth.userid
 		WHERE mem.userid = #{userid}
 	</select>
+	
+	<insert id="regiUser">
+		insert all into tbl_member (userid, userpw, username, userphone, useremail) values (#{userid}, #{userpw}, #{userName}, #{userphone}, #{useremail})
+		into tbl_member_auth (userid, auth) values (#{userid}, 'ROLE_USER')
+		select * from sys.dual
+	</insert>
+	
+	<update id="updateUser">
+		update tbl_member set username = #{userName}, userphone = #{userphone}, useremail = #{useremail} where userid = #{userid}
+	</update>
+	
+	<delete id="remove">
+		delete from tbl_member where userid = #{userid}
+	</delete>
 </mapper>

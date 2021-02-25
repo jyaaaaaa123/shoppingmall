@@ -19,7 +19,7 @@
 					<li class="nav-item"><a class="nav-link" href="#"> <span
 							></span> 주문목록
 					</a></li>
-					<li class="nav-item"><a class="nav-link" href="#"> <span
+					<li class="nav-item"><a class="nav-link" href="/member/withdraw"> <span
 							></span> 회원탈퇴
 					</a></li>
 				</ul>
@@ -29,48 +29,38 @@
 		<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 			
 			<div class="row mb-2">
-				<form action="/member/myPage" method="post">
+				<form action="/member/myPageUpdate" method="post">
                   <div class="col-12">
                   
                     <label for="userId" class="form-label">아이디</label>
-                    <input type="text" class="form-control" id="userId" placeholder="ID" value="<sec:authentication property='principal.username' />" readonly="readonly">
+                    <input type="text" name="userid" class="form-control" id="userId" placeholder="ID" value="<sec:authentication property='principal.username' />" readonly="readonly">
                   </div>
       
-                  
-                  <div class="col-12">
-                    <label for="email" class="form-label">비밀번호</label>
-                    <input type="email" class="form-control" id="email" placeholder="Password">
-                  </div>
-
-                  <div class="col-12">
-                    <label for="email" class="form-label">비밀번호 확인</label>
-                    <input type="email" class="form-control" id="email" placeholder="PasswordCheck">
-                  </div>
 
                   <div class="col-12">
                     <label for="username" class="form-label">이름</label>
                     <div class="input-group has-validation">
-                      <input type="text" class="form-control" id="username" placeholder="Username" value="<sec:authentication property='principal.member.userName' />" required>
+                      <input type="text" name="userName" class="form-control" id="username" placeholder="Username" value="<sec:authentication property='principal.member.userName' />" required>
                     </div>
                   </div>
       
       
                   <div class="col-12">
                     <label for="address2" class="form-label">전화번호</label>
-                    <input type="text" class="form-control" id="address2" placeholder="Phone Number"  value="<sec:authentication property='principal.member.userphone' />">
+                    <input type="text" name="userphone" class="form-control" id="address2" placeholder="Phone Number"  value="<sec:authentication property='principal.member.userphone' />">
                   </div>
       
                 
                   <div class="col-12">
                     <label for="address2" class="form-label">이메일</label>
-                    <input type="text" class="form-control" id="address2" placeholder="email"  value="<sec:authentication property='principal.member.useremail' />">
+                    <input type="text" name="useremail" class="form-control" id="address2" placeholder="email"  value="<sec:authentication property='principal.member.useremail' />">
                   </div>
+                  
+                  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
                   <button class="btn btn-primary btn-lg" type="submit">회원정보 수정</button>
                 	<button class="btn btn-primary btn-lg" type="reset">취소</button>
                  </form>  
                 </div>  
-                
-				
 		</main>
 	</div>
 </div>

@@ -23,7 +23,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 		
 		log.warn("Load User By UserName : " + userName);
 		
-		MemberVO vo = memberMapper.read(userName);
+		MemberVO vo = memberMapper.readUser(userName);
 		
 		log.warn("queried by member mapper :" + vo);
 		

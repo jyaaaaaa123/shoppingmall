@@ -70,7 +70,7 @@
           </div>
           <div>
           <button id="btn-success" class="btn btn-lg btn-primary" type="submit">로그인</button>
-          <button class="btn btn-lg btn-secondary" type="button">회원가입</button>
+          <button id="btn-register" class="btn btn-lg btn-secondary" type="button">회원가입</button>
           </div>
           <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
         </form>
@@ -79,12 +79,20 @@
       <!-- jQuery -->
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
       
-      <script>
-      	$('.btn-success').on('click', function (e) {
-      		e.preventDefault();
-      		$('form').submit();
-      	});
-      
+      <script type="text/javascript">
+      $(document).ready(
+    	function() {
+    		$('#btn-register').on('click', function (e) {
+          		self.location = '/member/register';
+          	});
+    		
+    		$('#btn-success').on('click', function (e) {
+          		e.preventDefault();
+          		$('form').submit();
+          	});
+    
+    	
+    	});
       </script>
 </body>
 </html>

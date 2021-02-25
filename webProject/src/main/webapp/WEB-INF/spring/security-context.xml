@@ -21,7 +21,7 @@
 		
 		<security:form-login login-page="/member/login"/>
 		
-		<security:logout logout-url="/member/logout" logout-success-url="/product/list?product_ctgr" invalidate-session="true"/>
+		<security:logout logout-url="/member/logout" logout-success-url="/" invalidate-session="true"/>
 		
 	</security:http>
 	
