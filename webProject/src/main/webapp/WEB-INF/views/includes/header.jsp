@@ -21,9 +21,12 @@
            	<sec:authorize access="isAnonymous()">
             <a class="p-2 text-dark" href="#">회원가입</a>
             </sec:authorize>
+            <sec:authorize access="hasAnyRole('ROLE_ADMIN')">
+            <a class="p-2 text-dark" href="/admin/adminProduct" >관리자페이지</a>
+            </sec:authorize>
             <a class="p-2 text-dark" href="/member/myPage" >마이페이지</a>
            	<sec:authorize access="isAuthenticated()">
-            <a class="p-2 text-dark" href="/qna/center?userid=<sec:authentication property="principal.username" />">고객센터</a>
+            	<a class="p-2 text-dark" href="/qna/center">고객센터</a>
             </sec:authorize>
           </nav>
           <sec:authorize access="isAnonymous()">

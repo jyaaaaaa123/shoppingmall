@@ -1,5 +1,7 @@
 package com.myshopping.controller;
 
+import java.security.Principal;
+
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +24,7 @@ public class QnaController {
 	
 	@GetMapping("/center")
 	@PreAuthorize("isAuthenticated()")
-	public void center(@RequestParam("userid") String userid, Model model) {
-		model.addAttribute("qnaList", qnaservice.read(userid));
+	public void center(Principal principal, Model model) {
+		model.addAttribute("qnaList", qnaservice.read(principal.getName()));
 	}
 }

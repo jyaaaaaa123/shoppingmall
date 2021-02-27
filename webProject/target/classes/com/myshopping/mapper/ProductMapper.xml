@@ -6,7 +6,7 @@
 	
 	<select id="getList" resultType="com.myshopping.domain.ProductVO">
 	<![CDATA[
-		select * from tbl_product where product_code > 0
+		select * from tbl_product where product_code > 0 order by product_code desc
 	]]>
 	</select>
 	

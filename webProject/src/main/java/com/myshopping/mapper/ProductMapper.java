@@ -5,14 +5,17 @@ import java.util.List;
 import com.myshopping.domain.ProductVO;
 
 public interface ProductMapper {
+	
+	//전체 목록 조회
 	public List<ProductVO> getList();
 	
-	//pk값을 알필요 없는 경우와 알아야 하는 경우
+	//pk값을 알필요 없는 경우와 알아야 하는 경우 C
 	public void insert(ProductVO product);
 	
 	public void insertSelectKey(ProductVO product);
 	
-	//코드로 가져오기
+	
+	//상품코드로 가져오기 R
 	public ProductVO read(Long product_code);
 	
 	//카테고리로 가져오기
@@ -23,8 +26,9 @@ public interface ProductMapper {
 	
 	public List<ProductVO> readBestProductHome();
 	
-	//삭제완료시 1, 없을시 0
+	//삭제완료시 1, 없을시 0 D
 	public int delete(Long product_code);
 	
+	//U
 	public int update(ProductVO product);
 }
