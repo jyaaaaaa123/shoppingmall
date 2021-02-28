@@ -53,6 +53,12 @@ public class ProductServiceImpl implements ProductService {
 		return mapper.readBestProduct(product_ctgr);
 	}
 
+	@Override
+	public List<ProductVO> getList() {
+		// TODO Auto-generated method stub
+		return mapper.getList();
+	}
+
 	
 
 }

@@ -19,4 +19,6 @@ public interface ProductService {
 	public List<ProductVO> getBestListHome();
 	
 	public List<ProductVO> getBestList(String product_ctgr);
+	
+	public List<ProductVO> getList();
 }
