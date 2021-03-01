@@ -53,7 +53,7 @@
 			            </tr>
 			          </thead>
 			          <tbody>
-			          <c:forEach var="product" items="${list}">
+			          <c:forEach var="product" items="${list}" varStatus="status">
 			          	<tr>
 			              <td><c:out value="${product.product_code}"/></td>
 			              <td><c:out value="${product.product_ctgr}"/></td>
@@ -63,12 +63,12 @@
 			              <td><c:out value="${product.product_sales}"/></td>
 			              <td>
 			              	<div class="d-grid gap-2">
-			              	<button type="button" class="btn btn-secondary">수정</button>
+			              		<button id='modifyProduct${product.product_code}' type="button" class="btn btn-secondary">수정</button>
 			              	</div>	
 			              </td>
 			              <td>
 			              	<div class="d-grid gap-2">
-			                	<button type="button" class="btn btn-danger">삭제</button>
+			                	<button id='removeProduct${product.product_code}' type="button" class="btn btn-danger">삭제</button>
 			                </div>
 			                </td>
 			            </tr>
@@ -95,11 +95,34 @@
 					  </div>
 					</div>
 					<!-- /modal -->
+					
+					<!-- remove modal -->
+			        <div id="removeModal" class="modal fade" tabindex="-1">
+					  <div class="modal-dialog">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <h5 class="modal-title">상품 삭제</h5>
+					        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					      </div>
+					      <div class="modal-body">
+					        <p>삭제하시겠습니까?</p>
+					      </div>
+					      <div class="modal-footer">
+					      	<form action="admin/adminProductRemove" method="post">
+					      		<button type="submit" class="btn btn-primary"  data-oper="remove">삭제</button>
+					       		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+					      	</form>
+					      </div>
+					    </div>
+					  </div>
+					</div>
+					<!-- /modal -->
 				</div>
 			</div>
 		</main>
 	</div>
 </div>
+
 
 <script type="text/javascript">
 $(document).ready(function() {
@@ -118,7 +141,23 @@ $(document).ready(function() {
 		}
 		
 		$("#myModal").modal("show");
-	}
+	};
+	
+
+	
+	$("[id^=removeProduct]").on("click",function(event){
+        var idcode = $(this).attr('id');
+        var code = idcode.substr(13);
+        $("#removeModal").find(".modal-body").text("상품 코드 " + code + " 삭제하시겠습니까?");
+		$("#removeModal").modal("show");
+    });
+	
+	$("[id^=modifyProduct]").on("click",function(event){
+        var idcode = $(this).attr('id');
+        var code = idcode.substr(13);
+        
+        self.location = "/admin/adminProductUpdate?product_code=" + code;
+    });
 	
 	$("#regProduct").on("click", function(){
 		self.location = "/admin/adminProductRegister";

@@ -34,16 +34,56 @@
             <img src="img/imageSample.jpg" class="img-thumbnail " alt="">
         </div>
         <div class="col-4">
-            <div class="row ">
+            <div class="row">
                 <strong class="d-inline-block mb-2 text-primary"><c:out value="${selectedProduct.product_ctgr}"/></strong>
                     <h3 class="mb-0"><c:out value="${selectedProduct.product_name}"/></h3>
                     <div class="mb-1 text-muted"><c:out value="${selectedProduct.product_price}"/></div>
                     <p class="card-text mb-auto"><c:out value="${selectedProduct.product_explain}"/></p>
+                   	
             </div>
             <br>
             <div class="row">
+            	<input type="text" id="stock" class="input-group mb-3" style="width: 60px;" value="1">
                 <p>
-                    <a class="btn btn-secondary" href="#">장바구니</a>
+                    <button type="button" id="btn_cart" class="btn btn-secondary">장바구니</button>
+                    <script type="text/javascript">
+                   
+                    
+                    $("#btn_cart").click(function () {
+                    		var product_code = ${selectedProduct.product_code};
+                    		var cart_stock = $("#stock").val();
+                    		
+                    		var data = {
+                    				product_code : product_code,
+                    				cart_stock : cart_stock
+                    		};		
+                    		
+                    		var token = $("meta[name='_csrf']").attr("content");
+                        	var header = $("meta[name='_csrf_header']").attr("content");
+                        	$.ajaxPrefilter(function(options, originalOptions, jqXHR) {
+                        		if (options['type'].toLowerCase() === 'post') {
+                        			jqXHR.setRequestHeader(header, token)
+                        		}
+                        	});
+                        	
+                    			
+                  
+                            	
+                    		$.ajax({
+                    			url : "/cart/add",
+                    			type : "post",
+                    			data: data,
+                    			success : function () {
+                    				alert("카트 담기 완료");
+                    				$("#stock").val("1");
+                    			},
+                    			error : function() {
+                    				alert("카트 담기 실패");
+                    			}
+                    			
+                    		});
+                    	});
+                    </script>
                     <a class="btn btn-secondary" href="#">구매하기</a>
                     <a class="btn btn-secondary" href="#">찜하기</a>
                 </p>

@@ -34,7 +34,38 @@
 			<div class="row mb-2">
 			      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 			      
-			      
+			      <form role="form" action="/admin/adminProductUpdate" method="post">
+			      	<div class="form-group">
+			      		<label>상품 카테고리</label>
+			      		<select class="form-select" aria-label="상품 카테고리" name="product_ctgr">
+						  <option selected>선택해주세요</option>
+						  <option value="키보드">키보드</option>
+						  <option value="마우스">마우스</option>
+						  <option value="모니터">모니터</option>
+						</select>
+			      	</div>
+			      	<div class="form-group">
+			      		<label>상품 이름</label>
+			      		<input class="form-control" type="text" name="product_name" value="<c:out value='${get.product_name}'/>">
+			      	</div>
+			      	<div class="form-group">
+			      		<label>상품 설명</label>
+			      		<div class="form-floating">
+						  <textarea class="form-control" id="floatingTextarea" name="product_explain"><c:out value='${get.product_explain}'/></textarea>
+					</div>
+			      	</div>
+			      	<div class="form-group">
+			      		<label>상품 가격</label>
+			      		<input class="form-control" type="text" name="product_price" value="<c:out value='${get.product_price}'/>">
+			      	</div>
+			      	<div class="form-group">
+			      		<label>상품 재고</label>
+			      		<input class="form-control" type="text" name="product_stock" value="<c:out value='${get.product_stock}'/>">
+			      	</div>
+			      	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+			      	<button type="submit" class="btn btn-primary">수정</button>
+			      	<button type="reset" class="btn btn-danger">취소</button>
+			      	</form>
 			      </div>
 			</div>
 		</main>

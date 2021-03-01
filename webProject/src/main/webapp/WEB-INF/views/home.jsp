@@ -24,7 +24,7 @@
       
           <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
             <!-- banner -->
-            <div id="carouselExampleControls" class="carousel slide w-50" data-bs-ride="carousel">
+            <div id="carouselExampleControls" class="carousel slide w-75" data-bs-ride="carousel">
                 <div class="carousel-inner">
                   <div class="carousel-item active">
                     <img src="/resources/image/firstSlide.png" class="d-block w-100" alt="...">

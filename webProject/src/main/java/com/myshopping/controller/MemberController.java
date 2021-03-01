@@ -26,7 +26,6 @@ public class MemberController {
 	private MemberService service;
 	
 	
-	
 	private BCryptPasswordEncoder pwdEncoder;
 	
 	@GetMapping("/myPage")

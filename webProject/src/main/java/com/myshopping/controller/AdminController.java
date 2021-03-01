@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.myshopping.domain.ProductVO;
@@ -29,8 +30,8 @@ public class AdminController {
 	}
 	
 	@GetMapping("/adminProductUpdate")
-	public void adminProductUpdate() {
-		
+	public void adminProductUpdate(@RequestParam("product_code") Long code, Model model) {
+		model.addAttribute("get", service.get(code));
 	}
 	
 	@GetMapping("/adminProductRegister")
@@ -44,6 +45,17 @@ public class AdminController {
 		
 		rttr.addFlashAttribute("result", product.getProduct_code());
 		
+		return "redirect:/admin/adminProduct";
+	}
+	
+	@PostMapping("/adminProductRemove")
+	public void adminProductRemove() {
+		
+	}
+	
+	@PostMapping("/adminProductUpdate")
+	public String moidfy(ProductVO product) {
+		service.modify(product);
 		return "redirect:/admin/adminProduct";
 	}
 	

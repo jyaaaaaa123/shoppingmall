@@ -7,8 +7,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
      <!-- Bootstrap core CSS -->
     <link href="/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/resources/bootstrap/js/bootstrap.min.js"></script>
+    <sec:csrfMetaTags/>
 </head>
 <body>
     <header class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-body border-bottom shadow-sm">
@@ -39,7 +42,6 @@
           </form>
           </sec:authorize>
       </header>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script type="text/javascript">
 	$(document).ready(
