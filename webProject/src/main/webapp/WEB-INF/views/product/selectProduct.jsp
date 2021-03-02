@@ -65,10 +65,7 @@
                         			jqXHR.setRequestHeader(header, token)
                         		}
                         	});
-                        	
-                    			
-                  
-                            	
+                        		
                     		$.ajax({
                     			url : "/cart/add",
                     			type : "post",

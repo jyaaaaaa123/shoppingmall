@@ -7,5 +7,25 @@
 		insert into tbl_cart (cart_code, userid, product_code, cart_stock)
 		values (seq_cart.nextval, #{userid}, #{product_code}, #{cart_stock})
 	</insert>
-
+	
+	<select id="cartList" resultType="com.myshopping.domain.CartListVO">
+		SELECT 
+			ct.cart_code, ct.userid, ct.cart_stock, pd.product_code, pd.product_name, pd.product_price 
+		FROM tbl_cart ct INNER join TBL_PRODUCT pd 
+			on ct.PRODUCT_CODE = pd.PRODUCT_CODE 
+		WHERE ct.USERID = #{userid}
+	</select>
+	
+	
+	
+	<update id="updateCart">
+		update tbl_cart 
+			set cart_stock = #{cart_stock}
+			where cart_code = #{cart_code}
+	</update>
+	
+	<delete id="deleteCart">
+		delete from tbl_cart where cart_code = #{cart_code}
+	</delete>
+	
 </mapper>
