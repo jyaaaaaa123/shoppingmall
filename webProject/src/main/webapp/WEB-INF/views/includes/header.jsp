@@ -22,7 +22,7 @@
         </form>
            <nav class="my-2 my-md-0 me-md-3">
            	<sec:authorize access="isAnonymous()">
-            	<a class="p-2 text-dark" href="#">회원가입</a>
+            	<a class="p-2 text-dark" href="/member/register">회원가입</a>
             </sec:authorize>
             <sec:authorize access="hasAnyRole('ROLE_ADMIN')">
             	<a class="p-2 text-dark" href="/admin/adminProduct" >관리자페이지</a>

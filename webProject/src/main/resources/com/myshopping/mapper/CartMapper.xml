@@ -28,4 +28,8 @@
 		delete from tbl_cart where cart_code = #{cart_code}
 	</delete>
 	
+	
+	<delete id="deleteAllCart">
+		delete from tbl_cart where userid = #{userid}
+	</delete>
 </mapper>

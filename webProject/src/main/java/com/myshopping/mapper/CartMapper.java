@@ -18,4 +18,7 @@ public interface CartMapper {
 	
 	//카트 삭제
 	public void deleteCart(Long cart_code);
+	
+	//카트 전체 삭제
+	public void deleteAllCart(String userid);
 }

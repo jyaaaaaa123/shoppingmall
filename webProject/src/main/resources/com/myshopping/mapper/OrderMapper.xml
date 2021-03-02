@@ -3,6 +3,18 @@
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.myshopping.mapper.OrderMapper">
-
+	<insert id="insertOrder">
+		insert into tbl_order
+			(order_code, userid, order_name, order_phone, order_address, order_allprice)
+		values (#{order_code},  #{userid}, #{order_name}, #{order_phone}, #{order_address}, #{order_allprice})
+	</insert>
+	
+	
+	<insert id="insertOrderProduct">
+		insert into tbl_order_product 
+			(order_product_code, product_code, order_code, order_product_stock, userid)
+			select SEQ_order_product.nextval, product_code, #{order_code}, cart_stock, #{userid}
+			from tbl_cart where userid = #{userid}
+	</insert>
 
 </mapper>

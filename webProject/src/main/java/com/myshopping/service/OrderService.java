@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.myshopping.domain.CartListVO;
 import com.myshopping.domain.CartVO;
+import com.myshopping.domain.OrderProductVO;
+import com.myshopping.domain.OrderVO;
 
 public interface OrderService {
 	
@@ -14,6 +16,10 @@ public interface OrderService {
 	
 	public void deleteCart(Long cart_code);
 	
-	//Order
+	public void deleteAllCart(String userid);
 	
+	//Order
+	public void insertOrder(OrderVO order);
+	
+	public void insertOrderProduct(OrderProductVO orderProduct);
 }

@@ -7,6 +7,7 @@ public class OrderProductVO {
 	
 	private Long order_product_code;
 	private Long product_code;
-	private Long order_code;
+	private String order_code;
 	private int order_product_stock;
+	private String userid;
 }
