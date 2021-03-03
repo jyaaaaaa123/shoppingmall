@@ -25,25 +25,21 @@
 				</ul>
 			</div>
 		</nav>
-
 		<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 			
 			<div class="row mb-2">
-				<form action="/member/withdraw" method="post">
-                  
-                  <div class="col">
-                  	정말 회원을 탈퇴하시겠습니까?<br>
-                  	탈퇴 하실려면 비밀번호을 입력해주세요
-                  </div>
-                  <div class="col">
-                  	<label for="userpassword">비밀번호 : </label>
-                  	<input type="password" name="userpw" id="userpassword">
-                  	<input type="hidden" name="userid" value="<sec:authentication property='principal.username' />">
-                  </div>
-                  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-                  <button class="btn btn-primary btn-lg" type="submit">탈퇴</button>
-                 </form>  
-                </div>  
+				<c:forEach var="order" items="${orderList}">
+        		<li class="list-group-item d-flex justify-content-between lh-sm">
+		            <div>
+		            	<small class="text-muted">주문 날짜 : <fmt:formatDate value="${order.order_day}"/></small>
+		              <h6 class="my-0">주문코드 : <a type="button" href="/member/myOrderSelect?order_code=<c:out value='${order.order_code}'/>"><c:out value="${order.order_code}"/></a></h6>
+		              <small class="text-muted">수령인 : <c:out value="${order.order_name}"/></small><br>
+		              <small class="text-muted">가격 : <c:out value="${order.order_allprice}"/>원</small><br>
+		            <small class="text-muted">주소 : <c:out value="${order.order_address}"/></small>
+		            </div>
+          		</li>
+        		</c:forEach>
+            </div>  
 		</main>
 	</div>
 </div>

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.myshopping.domain.CartListVO;
 import com.myshopping.domain.CartVO;
+import com.myshopping.domain.OrderProductListVO;
 import com.myshopping.domain.OrderProductVO;
 import com.myshopping.domain.OrderVO;
 import com.myshopping.mapper.CartMapper;
@@ -50,6 +51,16 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public void insertOrder(OrderVO order) {
 		orderMapper.insertOrder(order);
+	}
+
+	@Override
+	public List<OrderVO> getOrderList(String userid) {
+		return orderMapper.getOrderList(userid);
+	}
+
+	@Override
+	public List<OrderProductListVO> getOrderSelectList(String order_code) {
+		return orderMapper.getOrderSelectList(order_code);
 	}
 
 	

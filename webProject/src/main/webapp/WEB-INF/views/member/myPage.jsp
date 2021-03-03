@@ -16,7 +16,7 @@
 					<li class="nav-item"><a class="nav-link" href="/member/myPage"> <span
 							></span> 내정보
 					</a></li>
-					<li class="nav-item"><a class="nav-link" href="#"> <span
+					<li class="nav-item"><a class="nav-link" href="/member/myOrder"> <span
 							></span> 주문목록
 					</a></li>
 					<li class="nav-item"><a class="nav-link" href="/member/withdraw"> <span

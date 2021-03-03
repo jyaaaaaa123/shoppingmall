@@ -1,6 +1,8 @@
 package com.myshopping.controller;
 
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.myshopping.domain.MemberVO;
 import com.myshopping.service.MemberService;
+import com.myshopping.service.OrderService;
 import com.myshopping.service.QnaService;
 
 import lombok.AllArgsConstructor;
@@ -23,8 +26,8 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class MemberController {
 	
-	private MemberService service;
-	
+	private MemberService memberService;
+	private OrderService orderService;
 	
 	private BCryptPasswordEncoder pwdEncoder;
 	
@@ -45,7 +48,7 @@ public class MemberController {
 		String pwd = pwdEncoder.encode(inputPass);
 		member.setUserpw(pwd);
 		
-		service.Register(member);
+		memberService.Register(member);
 		
 		return "redirect:/member/login";
 	}
@@ -53,7 +56,7 @@ public class MemberController {
 	@PostMapping("myPageUpdate")
 	@PreAuthorize("isAuthenticated()")
 	public String updateUser(MemberVO member) {
-		service.update(member);
+		memberService.update(member);
 		
 		return "redirect:/member/myPage";
 	}
@@ -66,10 +69,23 @@ public class MemberController {
 	@PostMapping("/withdraw")
 	@PreAuthorize("isAuthenticated()")
 	public String withdrawUser(@RequestParam("userid") String userid) {
-		service.remove(userid);
+		memberService.remove(userid);
 		
 		return "redirect:/";
 	}
 	
+	@GetMapping("/myOrder")
+	@PreAuthorize("isAuthenticated()")
+	public void myOrder(Model model) {
+		UserDetails member = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String userid = member.getUsername();
 	
+		model.addAttribute("orderList", orderService.getOrderList(userid));
+	}
+	
+	@GetMapping("/myOrderSelect")
+	@PreAuthorize("isAuthenticated()")
+	public void myOrder(@RequestParam("order_code") String order_code, Model model) {
+		model.addAttribute("orderSelectList", orderService.getOrderSelectList(order_code));
+	}
 }
