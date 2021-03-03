@@ -7,25 +7,16 @@
         <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
           <div class="position-sticky pt-3">
             <ul class="nav flex-column">
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="file"></span>
-                  키보드
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="shopping-cart"></span>
-                  마우스
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="users"></span>
-                  모니터
-                </a>
-              </li>
-            </ul>
+					<li class="nav-item"><a class="nav-link" href="/product/list?product_ctgr=키보드"> <span
+							data-feather="file"></span> 키보드
+					</a></li>
+					<li class="nav-item"><a class="nav-link" href="/product/list?product_ctgr=마우스"> <span
+							data-feather="shopping-cart"></span> 마우스
+					</a></li>
+					<li class="nav-item"><a class="nav-link" href="/product/list?product_ctgr=모니터"> <span
+							data-feather="users"></span> 모니터
+					</a></li>
+				</ul>
           </div>
         </nav>
     <main class="col-md-10">

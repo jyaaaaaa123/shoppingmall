@@ -52,7 +52,12 @@ public class OrderServiceImpl implements OrderService {
 	public void insertOrder(OrderVO order) {
 		orderMapper.insertOrder(order);
 	}
-
+	
+	@Override
+	public List<OrderVO> getAllOrderList() {
+		return orderMapper.getAllOrderList();
+	}
+	
 	@Override
 	public List<OrderVO> getOrderList(String userid) {
 		return orderMapper.getOrderList(userid);
@@ -62,6 +67,13 @@ public class OrderServiceImpl implements OrderService {
 	public List<OrderProductListVO> getOrderSelectList(String order_code) {
 		return orderMapper.getOrderSelectList(order_code);
 	}
+
+	@Override
+	public int updateOrderComplete(String order_code) {
+		return orderMapper.updateOrderComplete(order_code);
+	}
+
+	
 
 	
 

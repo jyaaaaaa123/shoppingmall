@@ -41,12 +41,49 @@
 				              <h6 class="my-0">상품명 : <c:out value="${order.product_name}"/></h6>
 							<small class="text-muted">수량 : <c:out value="${order.order_product_stock}"/></small>
 				            </div>
+				            <c:if test="${order.order_complete}">
+		            		<button id="productPost${order.order_product_code}&${order.product_code}" type="button" class="btn btn-primary">후기 작성</button>
+		            		
+		          			</c:if>
 		          			</li>
 		          		</div>
         			</c:forEach>  
-            
 		</main>
 	</div>
 </div>
+
+<script type="text/javascript">
+
+	$("[id^=productPost]").on("click", function() {
+		var id = $(this).attr("id");
+		var code = id.replace("productPost", "").split("&");
+		
+		var data = {
+			order_product_code : code[0],
+			product_code : code[1]
+		};
+		
+		var token = $("meta[name='_csrf']").attr("content");
+		var header = $("meta[name='_csrf_header']").attr("content");
+		$.ajaxPrefilter(function(options, originalOptions, jqXHR) {
+			if (options['type'].toLowerCase() === 'post') {
+				jqXHR.setRequestHeader(header, token)
+			}
+		});
+		
+		$.ajax({
+			url: '/member/myOrderPost',
+			type: 'post',
+			data: data,
+			success: function() {
+				alert("성공");
+			},
+			error: function() {
+				alert("실패");
+			}
+		});
+	});
+</script>
+
 
 <%@ include file="../includes/footer.jsp"%>

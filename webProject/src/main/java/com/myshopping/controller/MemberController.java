@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.myshopping.domain.MemberVO;
@@ -88,4 +89,12 @@ public class MemberController {
 	public void myOrder(@RequestParam("order_code") String order_code, Model model) {
 		model.addAttribute("orderSelectList", orderService.getOrderSelectList(order_code));
 	}
+	
+	@ResponseBody
+	@PostMapping("/myOrderPost")
+	@PreAuthorize("isAuthenticated()")
+	public void myOrderPost(@RequestParam("order_product_code") Long order_product_code, 
+			@RequestParam("product_code") Long product_code) {
+	}
+
 }

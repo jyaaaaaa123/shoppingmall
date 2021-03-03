@@ -51,5 +51,4 @@ public class OrderController {
 		
 		service.deleteAllCart(userid);
 	}
-
 }

@@ -24,7 +24,11 @@ public interface OrderService {
 	
 	public void insertOrderProduct(OrderProductVO orderProduct);
 	
+	public List<OrderVO> getAllOrderList();
+	
 	public List<OrderVO> getOrderList(String userid);
 	
 	public List<OrderProductListVO> getOrderSelectList(String order_code);
+	
+	public int updateOrderComplete(String order_code);
 }

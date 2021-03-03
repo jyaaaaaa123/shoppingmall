@@ -15,6 +15,8 @@ public interface OrderMapper {
 	public void insertOrderProduct(OrderProductVO orderProduct);
 	
 	//Read
+	public List<OrderVO> getAllOrderList();
+	
 	public List<OrderVO> getOrderList(String userid);
 	
 	public List<OrderProductVO> getOrderProductList();
@@ -22,6 +24,8 @@ public interface OrderMapper {
 	public List<OrderProductListVO> getOrderSelectList(String order_code);
 	
 	//Update
+	public int updateOrderComplete(String order_code);
+	
 	
 	//delete
 }

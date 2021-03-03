@@ -37,6 +37,14 @@
 		              <small class="text-muted">가격 : <c:out value="${order.order_allprice}"/>원</small><br>
 		            <small class="text-muted">주소 : <c:out value="${order.order_address}"/></small>
 		            </div>
+		            <c:choose>
+		            	<c:when test="${!order.order_complete}">
+		            		<div><h5>배송 상태 : 배송중</h5></div>
+		            	</c:when>
+		            	<c:otherwise>
+							<div><h5>배송 상태 : 배송 완료</h5></div>
+		            	</c:otherwise>
+		            </c:choose>  
           		</li>
         		</c:forEach>
             </div>  
