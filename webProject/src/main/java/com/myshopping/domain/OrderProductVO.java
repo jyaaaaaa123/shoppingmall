@@ -10,4 +10,5 @@ public class OrderProductVO {
 	private String order_code;
 	private int order_product_stock;
 	private String userid;
+	private boolean order_product_comment;
 }

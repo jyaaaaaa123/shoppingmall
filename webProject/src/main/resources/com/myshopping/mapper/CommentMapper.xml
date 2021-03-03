@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myshopping.mapper.CommentMapper">
+	<select id="getCommentByProduct" resultType="com.myshopping.domain.CommentVO">
+		select * from tbl_comment where product_code = #{product_code}
+	</select>
+	
+	<select id="getCommentByOrder" resultType="com.myshopping.domain.CommentVO">
+		select * from tbl_comment where order_product_code = #{order_product_code}
+	</select>
+	
+	<insert id="insertComment">
+		insert into tbl_comment
+			(product_code, comment_code, userid, comment_content, comment_star, order_product_code)
+		values (#{product_code}, seq_comment.nextval, #{userid}, #{comment_content}, #{comment_star}, #{order_product_code})
+	</insert>
+</mapper>

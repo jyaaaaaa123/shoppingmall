@@ -91,7 +91,7 @@ public class MemberController {
 	}
 	
 	@ResponseBody
-	@PostMapping("/myOrderPost")
+	@PostMapping("/myOrderComment")
 	@PreAuthorize("isAuthenticated()")
 	public void myOrderPost(@RequestParam("order_product_code") Long order_product_code, 
 			@RequestParam("product_code") Long product_code) {

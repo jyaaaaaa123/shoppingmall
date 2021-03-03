@@ -19,6 +19,8 @@ public class OrderProductListVO {
 	private Long order_product_code;
 	private Long product_code;
 	private int order_product_stock;
+	private boolean order_product_comment;
+	
 	
 	private String product_ctgr;
 	private String product_name;
@@ -26,4 +28,5 @@ public class OrderProductListVO {
 	private String product_explain;
 	private int product_stock;
 	private int product_sales;
+	
 }

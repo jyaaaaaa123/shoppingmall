@@ -42,7 +42,7 @@
 							<small class="text-muted">수량 : <c:out value="${order.order_product_stock}"/></small>
 				            </div>
 				            <c:if test="${order.order_complete}">
-		            		<button id="productPost${order.order_product_code}&${order.product_code}" type="button" class="btn btn-primary">후기 작성</button>
+		            		<button id="productComment${order.order_product_code}&${order.product_code}" type="button" class="btn btn-primary">후기 작성</button>
 		            		
 		          			</c:if>
 		          			</li>
@@ -52,11 +52,44 @@
 	</div>
 </div>
 
+<!-- modal -->
+<div class="modal fade" id="commentModal" tabindex="-1" role="dialog"
+	aria-labelledby="commentModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="commentModalLabel">제품 후기 등록</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+        	<label for="comeContent">후기 내용</label>
+			<textarea class="form-control" id="comeContent" name="comment_content"></textarea>		
+			<label for="star">별점</label>
+				<select class="form-control" name="comment_star">
+					<option value="5">5</option>
+					<option value="4">4</option>
+					<option value="3">3</option>
+					<option value="2">2</option>
+					<option value="1">1</option>
+				</select>
+        </div>
+      </div>
+      <div class="modal-footer">
+      	<button type="button" class="btn btn-primary">등록</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script type="text/javascript">
 
-	$("[id^=productPost]").on("click", function() {
+	$("[id^=productComment]").on("click", function() {
+		$(".modal").modal("show");
+		
 		var id = $(this).attr("id");
-		var code = id.replace("productPost", "").split("&");
+		var code = id.replace("productComment", "").split("&");
 		
 		var data = {
 			order_product_code : code[0],
@@ -72,7 +105,7 @@
 		});
 		
 		$.ajax({
-			url: '/member/myOrderPost',
+			url: '/member/myOrderComment',
 			type: 'post',
 			data: data,
 			success: function() {
@@ -83,6 +116,7 @@
 			}
 		});
 	});
+	
 </script>
 
 
