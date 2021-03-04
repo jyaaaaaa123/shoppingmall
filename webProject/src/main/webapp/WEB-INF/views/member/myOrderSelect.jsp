@@ -42,8 +42,14 @@
 							<small class="text-muted">수량 : <c:out value="${order.order_product_stock}"/></small>
 				            </div>
 				            <c:if test="${order.order_complete}">
-		            		<button id="productComment${order.order_product_code}&${order.product_code}" type="button" class="btn btn-primary">후기 작성</button>
-		            		
+				            	<c:choose>
+				            		<c:when test="${order.order_product_comment}">
+				            			<button id="productComment${order.order_product_code}&${order.product_code}" type="button" class="btn btn-primary" disabled="disabled">후기 작성 완료</button>
+				            		</c:when>
+				            		<c:otherwise>
+				            			<button id="productComment${order.order_product_code}&${order.product_code}" type="button" class="btn btn-primary">후기 작성</button>
+				            		</c:otherwise>
+				            	</c:choose>
 		          			</c:if>
 		          			</li>
 		          		</div>
@@ -64,9 +70,9 @@
       <div class="modal-body">
         <div class="form-group">
         	<label for="comeContent">후기 내용</label>
-			<textarea class="form-control" id="comeContent" name="comment_content"></textarea>		
+			<textarea class="form-control" id="commentContent" name="comment_content"></textarea>		
 			<label for="star">별점</label>
-				<select class="form-control" name="comment_star">
+				<select class="form-control" id="commentStar" name="comment_star">
 					<option value="5">5</option>
 					<option value="4">4</option>
 					<option value="3">3</option>
@@ -76,7 +82,7 @@
         </div>
       </div>
       <div class="modal-footer">
-      	<button type="button" class="btn btn-primary">등록</button>
+      	<button id="commentSubmit" type="button" class="btn btn-primary" >등록</button>
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
       </div>
     </div>
@@ -86,35 +92,46 @@
 <script type="text/javascript">
 
 	$("[id^=productComment]").on("click", function() {
-		$(".modal").modal("show");
-		
 		var id = $(this).attr("id");
 		var code = id.replace("productComment", "").split("&");
 		
-		var data = {
-			order_product_code : code[0],
-			product_code : code[1]
-		};
 		
-		var token = $("meta[name='_csrf']").attr("content");
-		var header = $("meta[name='_csrf_header']").attr("content");
-		$.ajaxPrefilter(function(options, originalOptions, jqXHR) {
-			if (options['type'].toLowerCase() === 'post') {
-				jqXHR.setRequestHeader(header, token)
-			}
+		$(".modal").modal("show");
+		
+		$("#commentSubmit").on("click", function() {
+			var comment_content =  $("#commentContent").val();
+			var comment_star = $("#commentStar").val();
+				
+			var data = {
+				order_product_code : code[0],
+				product_code : code[1],
+				comment_content : comment_content,
+				comment_star : comment_star
+			};
+			
+			var token = $("meta[name='_csrf']").attr("content");
+			var header = $("meta[name='_csrf_header']").attr("content");
+			$.ajaxPrefilter(function(options, originalOptions, jqXHR) {
+				if (options['type'].toLowerCase() === 'post') {
+					jqXHR.setRequestHeader(header, token)
+				}
+			});
+			
+			$.ajax({
+				url: '/member/myOrderComment',
+				type: 'post',
+				data: data,
+				success: function() {
+					alert("후기를 등록했습니다");
+					$(".modal").modal("hide");
+				},
+				error: function() {
+					alert("후기 등록에 실패했습니다");
+					$(".modal").modal("hide");
+				}
+			});
 		});
 		
-		$.ajax({
-			url: '/member/myOrderComment',
-			type: 'post',
-			data: data,
-			success: function() {
-				alert("성공");
-			},
-			error: function() {
-				alert("실패");
-			}
-		});
 	});
 	
 </script>

@@ -15,4 +15,12 @@ public interface CommentMapper {
 	//insert
 	public void insertComment(CommentVO comment);
 	
+	//read
+	public CommentVO readComment(Long comment_code);
+	
+	//update 
+	public int updateComment(Long comment_code);
+	
+	//delete
+	public int deleteComment(Long comment_code);
 }

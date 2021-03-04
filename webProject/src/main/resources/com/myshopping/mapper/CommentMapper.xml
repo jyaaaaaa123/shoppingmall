@@ -16,4 +16,19 @@
 			(product_code, comment_code, userid, comment_content, comment_star, order_product_code)
 		values (#{product_code}, seq_comment.nextval, #{userid}, #{comment_content}, #{comment_star}, #{order_product_code})
 	</insert>
+	
+	<select id="readComment" resultType="com.myshopping.domain.CommentVO">
+		select * from tbl_comment where comment_code = #{comment_code}
+	</select>
+	
+	<update id="updateComment">
+		update tbl_comment
+			set comment_content = #{comment_content},
+			comment_star = #{comment_star}
+		where comment_code = #{comment_code}
+	</update>
+	
+	<delete id="deleteComment">
+		delete tbl_comment where comment_code = #{comment_code}
+	</delete>
 </mapper>

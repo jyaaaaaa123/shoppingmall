@@ -26,6 +26,7 @@ public interface OrderMapper {
 	//Update
 	public int updateOrderComplete(String order_code);
 	
+	public int updateOrderProductComplete(Long order_product_code);
 	
 	//delete
 }

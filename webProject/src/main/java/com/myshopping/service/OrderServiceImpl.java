@@ -6,10 +6,12 @@ import org.springframework.stereotype.Service;
 
 import com.myshopping.domain.CartListVO;
 import com.myshopping.domain.CartVO;
+import com.myshopping.domain.CommentVO;
 import com.myshopping.domain.OrderProductListVO;
 import com.myshopping.domain.OrderProductVO;
 import com.myshopping.domain.OrderVO;
 import com.myshopping.mapper.CartMapper;
+import com.myshopping.mapper.CommentMapper;
 import com.myshopping.mapper.OrderMapper;
 
 import lombok.AllArgsConstructor;
@@ -22,6 +24,7 @@ public class OrderServiceImpl implements OrderService {
 	
 	private CartMapper cartMapper;
 	private OrderMapper orderMapper;
+	private CommentMapper commentMapper;
 	
 	@Override
 	public void insertCart(CartVO cart) {
@@ -43,6 +46,8 @@ public class OrderServiceImpl implements OrderService {
 		cartMapper.deleteAllCart(userid);
 	}
 
+	
+	//order
 	@Override
 	public void insertOrderProduct(OrderProductVO orderProduct) {
 		orderMapper.insertOrderProduct(orderProduct);
@@ -71,6 +76,41 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public int updateOrderComplete(String order_code) {
 		return orderMapper.updateOrderComplete(order_code);
+	}
+	
+	//comment
+	@Override
+	public List<CommentVO> getCommentByProduct(String product_code) {
+		return commentMapper.getCommentByProduct(product_code);
+	}
+
+	@Override
+	public List<CommentVO> getCommentByOrder(String order_product_code) {
+		return commentMapper.getCommentByOrder(order_product_code);
+	}
+
+	@Override
+	public void insertComment(CommentVO comment, Long order_product_code) {
+		commentMapper.insertComment(comment);
+		orderMapper.updateOrderProductComplete(order_product_code);
+	}
+
+	@Override
+	public CommentVO readComment(Long comment_code) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int updateComment(Long comment_code) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int deleteComment(Long comment_code) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.myshopping.domain.CommentVO;
 import com.myshopping.domain.MemberVO;
 import com.myshopping.service.MemberService;
 import com.myshopping.service.OrderService;
@@ -93,8 +94,19 @@ public class MemberController {
 	@ResponseBody
 	@PostMapping("/myOrderComment")
 	@PreAuthorize("isAuthenticated()")
-	public void myOrderPost(@RequestParam("order_product_code") Long order_product_code, 
-			@RequestParam("product_code") Long product_code) {
+	public String myOrderPost(@RequestParam("order_product_code") Long order_product_code, 
+			@RequestParam("product_code") Long product_code,
+			@RequestParam("comment_content") String comment_content,
+			@RequestParam("comment_star") int comment_star,
+			CommentVO comment) 
+	{
+		UserDetails member = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String userid = member.getUsername();
+		comment.setUserid(userid);
+		
+		orderService.insertComment(comment, order_product_code);
+		
+		return "redirect:/member/myOrder";
 	}
 
 }

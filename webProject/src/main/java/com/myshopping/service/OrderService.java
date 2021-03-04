@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.myshopping.domain.CartListVO;
 import com.myshopping.domain.CartVO;
+import com.myshopping.domain.CommentVO;
 import com.myshopping.domain.OrderProductListVO;
 import com.myshopping.domain.OrderProductVO;
 import com.myshopping.domain.OrderVO;
@@ -31,4 +32,24 @@ public interface OrderService {
 	public List<OrderProductListVO> getOrderSelectList(String order_code);
 	
 	public int updateOrderComplete(String order_code);
+	
+	//comment
+	
+	//byProduct
+	public List<CommentVO> getCommentByProduct(String product_code);
+		
+	//byOrderProduct
+	public List<CommentVO> getCommentByOrder(String order_product_code);
+		
+	//insert
+	public void insertComment(CommentVO comment, Long order_product_code);
+		
+	//read
+	public CommentVO readComment(Long comment_code);
+		
+	//update 
+	public int updateComment(Long comment_code);
+		
+	//delete
+	public int deleteComment(Long comment_code);
 }
