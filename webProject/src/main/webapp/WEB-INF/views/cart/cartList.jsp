@@ -35,6 +35,7 @@
 							<h5>상품이 없습니다</h5>
 						</c:if>
 						<c:forEach var="cart" items="${cartList}">
+							<div class="card card-body">
 							<div class="col-12">
 								<p>
 									상품명
@@ -55,6 +56,7 @@
 								<button type="button" class="btn btn-primary" id="deleteCart${cart.cart_code}">삭제</button>
 							</div>
 							<br>
+							</div>
 						</c:forEach>
 						<button type="button" class="btn btn-primary" id="order">결제하기</button>
 					</div>

@@ -10,11 +10,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.myshopping.domain.CartListVO;
+import com.myshopping.domain.CartVO;
 import com.myshopping.domain.OrderProductVO;
 import com.myshopping.domain.OrderVO;
 import com.myshopping.service.OrderService;
+import com.myshopping.service.ProductService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -25,16 +28,17 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class OrderController {
 
-	private OrderService service;
+	private OrderService orderService;
+	private ProductService productService;
 	
 	@GetMapping("/orderCheck")
 	public void orderCheck(Model model) {
 		UserDetails member = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		model.addAttribute("cartList", service.getListCart(member.getUsername()));
+		model.addAttribute("cartList", orderService.getListCart(member.getUsername()));
 	}
 	
 	@PostMapping("/order")
-	public void order(OrderVO order, OrderProductVO orderProduct) {
+	public String order(OrderVO order, OrderProductVO orderProduct) {
 		UserDetails member = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String userid = member.getUsername();
 		String order_code = UUID.randomUUID().toString();
@@ -42,13 +46,14 @@ public class OrderController {
 		order.setUserid(userid);
 		order.setOrder_code(order_code);
 		
-		service.insertOrder(order);
+		orderService.insertOrder(order);
 		
 		orderProduct.setUserid(userid);
 		orderProduct.setOrder_code(order_code);
 		
-		service.insertOrderProduct(orderProduct);
+		orderService.insertOrderProduct(orderProduct);
 		
-		service.deleteAllCart(userid);
+		orderService.deleteAllCart(userid);
+		return "redirect:/";
 	}
 }

@@ -6,7 +6,6 @@
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
 <%@ include file="../includes/header.jsp" %>
-	<h1>my Page</h1>
 <div class="container-fluid">
 	<div class="row">
 		<nav id="sidebarMenu"
@@ -26,7 +25,8 @@
 			</div>
 		</nav>
 		<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-			
+			<h5>주문 상세 목록</h5>
+			<div class="card card-body">
 			<c:forEach var="order" items="${orderSelectList}" varStatus="status">
 			<c:if test="${status.first}">
 						<h6 class="my-0">주문코드 : <c:out value="${order.order_code}"/></h6>
@@ -53,7 +53,8 @@
 		          			</c:if>
 		          			</li>
 		          		</div>
-        			</c:forEach>  
+        			</c:forEach>
+        	</div>  
 		</main>
 	</div>
 </div>

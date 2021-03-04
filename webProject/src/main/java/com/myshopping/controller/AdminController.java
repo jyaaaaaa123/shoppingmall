@@ -1,5 +1,7 @@
 package com.myshopping.controller;
 
+import java.util.List;
+
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.myshopping.domain.OrderProductVO;
 import com.myshopping.domain.ProductVO;
 import com.myshopping.service.OrderService;
 import com.myshopping.service.ProductService;
+import com.myshopping.service.QnaService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -26,6 +30,7 @@ public class AdminController {
 	
 	private ProductService productService;
 	private OrderService orderService;
+	private QnaService qnaService;
 	
 	@GetMapping("/adminProduct")
 	public void adminProduct(Model model) {
@@ -52,8 +57,9 @@ public class AdminController {
 	}
 	
 	@PostMapping("/adminProductRemove")
-	public void adminProductRemove() {
-		
+	public String adminProductRemove(Long product_code) {
+		productService.remove(product_code);
+		return "redirect:/admin/adminProduct";
 	}
 	
 	@PostMapping("/adminProductUpdate")
@@ -67,16 +73,31 @@ public class AdminController {
 		model.addAttribute("orderList", orderService.getAllOrderList());
 	}
 	
+	@GetMapping("/adminOrderSelect")
+	public void adminOrderSelect(@RequestParam("order_code") String order_code, Model model) {
+		model.addAttribute("orderSelectList", orderService.getOrderSelectList(order_code));
+	}
+	
 	@ResponseBody
 	@PostMapping("/adminOrderCom")
 	public String adminOrderComplete(@RequestParam("order_code") String order_code) {
+		
 		orderService.updateOrderComplete(order_code);
-		return "redirect:/admin/adminOrder";
+		
+		List<OrderProductVO> opList = orderService.getOrderProductList(order_code);
+		System.out.println(opList);
+		
+		for(OrderProductVO op : opList) {
+			productService.updateProductSales(op);
+			productService.updateProductStock(op);
+		}
+		
+		return "redirect:/";
 	}
 	
 	@GetMapping("/adminQna")
-	public void adminQna() {
-		
+	public void adminQna(Model model) {
+		model.addAttribute("qnaList", qnaService.realAllList());
 	}
 	
 	@GetMapping("/adminMember")

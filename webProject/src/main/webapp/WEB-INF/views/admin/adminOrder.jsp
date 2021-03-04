@@ -60,10 +60,11 @@
 <script type="text/javascript">
 $("[id^=btnOrderComplete]").on("click", function() {
 	var id = $(this).attr("id");
-	var order_code = id.replace("btnOrderComplete", "");
+	var code = id.replace("btnOrderComplete", "");
+	
 	
 	var data = {
-			order_code : order_code
+			order_code : code
 	};
 	
 	var token = $("meta[name='_csrf']").attr("content");

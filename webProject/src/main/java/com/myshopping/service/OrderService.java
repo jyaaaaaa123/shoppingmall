@@ -25,21 +25,21 @@ public interface OrderService {
 	
 	public void insertOrderProduct(OrderProductVO orderProduct);
 	
-	public List<OrderVO> getAllOrderList();
+	public List<OrderProductListVO> getAllOrderList();
 	
 	public List<OrderVO> getOrderList(String userid);
+	
+	public List<OrderProductVO> getOrderProductList(String order_code);
 	
 	public List<OrderProductListVO> getOrderSelectList(String order_code);
 	
 	public int updateOrderComplete(String order_code);
 	
 	//comment
-	
-	//byProduct
-	public List<CommentVO> getCommentByProduct(String product_code);
+
 		
 	//byOrderProduct
-	public List<CommentVO> getCommentByOrder(String order_product_code);
+	public List<CommentVO> getCommentByOrder(Long order_product_code);
 		
 	//insert
 	public void insertComment(CommentVO comment, Long order_product_code);

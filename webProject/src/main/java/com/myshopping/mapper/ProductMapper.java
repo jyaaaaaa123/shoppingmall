@@ -2,6 +2,7 @@ package com.myshopping.mapper;
 
 import java.util.List;
 
+import com.myshopping.domain.OrderProductVO;
 import com.myshopping.domain.ProductVO;
 
 public interface ProductMapper {
@@ -29,6 +30,12 @@ public interface ProductMapper {
 	//삭제완료시 1, 없을시 0 D
 	public int delete(Long product_code);
 	
-	//U
+	//Update
 	public int update(ProductVO product);
+	
+	//update Stock
+	public int updateProductStock(OrderProductVO op);
+	
+	//update sales
+	public int updateProductSales(OrderProductVO op);
 }

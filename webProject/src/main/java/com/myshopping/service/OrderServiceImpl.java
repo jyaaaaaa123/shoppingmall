@@ -59,7 +59,7 @@ public class OrderServiceImpl implements OrderService {
 	}
 	
 	@Override
-	public List<OrderVO> getAllOrderList() {
+	public List<OrderProductListVO> getAllOrderList() {
 		return orderMapper.getAllOrderList();
 	}
 	
@@ -79,13 +79,9 @@ public class OrderServiceImpl implements OrderService {
 	}
 	
 	//comment
-	@Override
-	public List<CommentVO> getCommentByProduct(String product_code) {
-		return commentMapper.getCommentByProduct(product_code);
-	}
 
 	@Override
-	public List<CommentVO> getCommentByOrder(String order_product_code) {
+	public List<CommentVO> getCommentByOrder(Long order_product_code) {
 		return commentMapper.getCommentByOrder(order_product_code);
 	}
 
@@ -111,6 +107,11 @@ public class OrderServiceImpl implements OrderService {
 	public int deleteComment(Long comment_code) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public List<OrderProductVO> getOrderProductList(String order_code) {
+		return orderMapper.getOrderProductList(order_code);
 	}
 
 	

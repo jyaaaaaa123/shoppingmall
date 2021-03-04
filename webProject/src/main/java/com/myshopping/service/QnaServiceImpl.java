@@ -19,8 +19,15 @@ public class QnaServiceImpl implements QnaService {
 	private QnaMapper mapper;
 	
 	@Override
+	public List<QnaVO> realAllList() {
+		return mapper.realAllList();
+	}
+	
+	@Override
 	public List<QnaVO> read(String userid) {
 		return mapper.readList(userid);
 	}
+
+	
 
 }

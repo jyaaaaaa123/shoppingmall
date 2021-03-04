@@ -56,7 +56,6 @@
             <input type="checkbox" class="form-check-input" id="myInfo">
             <label class="form-check-label" for="same-address">내정보 가져오기</label>
           </div>
-			
 			<input type="hidden" name="order_allprice" value="<c:out value="${totalPrice}"/>">
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
           <button class="w-100 btn btn-primary btn-lg" type="submit" id="orderBtn">결제하기</button>

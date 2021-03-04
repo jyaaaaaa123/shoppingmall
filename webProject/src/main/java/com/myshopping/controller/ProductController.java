@@ -41,5 +41,7 @@ public class ProductController {
 	@GetMapping("/selectProduct")
 	public void getSelect(@RequestParam("product_code") Long product_code, Model model) {
 		model.addAttribute("selectedProduct", service.get(product_code));
+		model.addAttribute("List", service.getCommentByProduct(product_code));
+		System.out.println(model);
 	}
 }

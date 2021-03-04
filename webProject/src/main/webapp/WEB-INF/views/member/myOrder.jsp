@@ -6,7 +6,6 @@
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
 <%@ include file="../includes/header.jsp" %>
-	<h1>my Page</h1>
 <div class="container-fluid">
 	<div class="row">
 		<nav id="sidebarMenu"
@@ -26,7 +25,7 @@
 			</div>
 		</nav>
 		<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-			
+			<h5>주문 목록</h5>
 			<div class="row mb-2">
 				<c:forEach var="order" items="${orderList}">
         		<li class="list-group-item d-flex justify-content-between lh-sm">

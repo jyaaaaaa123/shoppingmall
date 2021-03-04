@@ -6,6 +6,8 @@ import com.myshopping.domain.QnaVO;
 
 public interface QnaMapper {
 	
+	public List<QnaVO> realAllList();
+	
 	public List<QnaVO> readList(String userid);
 	
 	//create

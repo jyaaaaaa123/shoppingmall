@@ -15,11 +15,11 @@ public interface OrderMapper {
 	public void insertOrderProduct(OrderProductVO orderProduct);
 	
 	//Read
-	public List<OrderVO> getAllOrderList();
+	public List<OrderProductListVO> getAllOrderList();
 	
 	public List<OrderVO> getOrderList(String userid);
 	
-	public List<OrderProductVO> getOrderProductList();
+	public List<OrderProductVO> getOrderProductList(String order_code);
 	
 	public List<OrderProductListVO> getOrderSelectList(String order_code);
 	

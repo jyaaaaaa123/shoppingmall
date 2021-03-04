@@ -3,7 +3,11 @@
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.myshopping.mapper.QnaMapper">
-
+	
+	<select id="realAllList" resultType="com.myshopping.domain.QnaVO">
+		select * from tbl_qna
+	</select>
+	
 	<select id="readList" resultType="com.myshopping.domain.QnaVO">
 		select * from tbl_qna where userid = #{userid}		
 	</select>

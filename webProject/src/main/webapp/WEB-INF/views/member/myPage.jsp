@@ -6,7 +6,6 @@
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
 <%@ include file="../includes/header.jsp" %>
-	<h1>my Page</h1>
 <div class="container-fluid">
 	<div class="row">
 		<nav id="sidebarMenu"
@@ -27,7 +26,8 @@
 		</nav>
 
 		<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-			
+			<h5>내 정보</h5>
+			<div class="card card-body">
 			<div class="row mb-2">
 				<form action="/member/myPageUpdate" method="post">
                   <div class="col-12">
@@ -61,6 +61,7 @@
                 	<button class="btn btn-primary btn-lg" type="reset">취소</button>
                  </form>  
                 </div>  
+               </div>
 		</main>
 	</div>
 </div>

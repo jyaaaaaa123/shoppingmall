@@ -108,7 +108,9 @@
 					        <p>삭제하시겠습니까?</p>
 					      </div>
 					      <div class="modal-footer">
-					      	<form action="admin/adminProductRemove" method="post">
+					      	<form action="/admin/adminProductRemove" method="post">
+					      		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+					     		<input type="hidden" id="product_code" name="product_code" value="">
 					      		<button type="submit" class="btn btn-primary"  data-oper="remove">삭제</button>
 					       		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
 					      	</form>
@@ -148,6 +150,7 @@ $(document).ready(function() {
 	$("[id^=removeProduct]").on("click",function(event){
         var idcode = $(this).attr('id');
         var code = idcode.substr(13);
+        $("input#product_code").val(code);
         $("#removeModal").find(".modal-body").text("상품 코드 " + code + " 삭제하시겠습니까?");
 		$("#removeModal").modal("show");
     });
@@ -158,6 +161,8 @@ $(document).ready(function() {
         
         self.location = "/admin/adminProductUpdate?product_code=" + code;
     });
+	
+	
 	
 	$("#regProduct").on("click", function(){
 		self.location = "/admin/adminProductRegister";
