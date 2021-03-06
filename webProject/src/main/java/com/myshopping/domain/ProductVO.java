@@ -1,5 +1,7 @@
 package com.myshopping.domain;
 
+import java.util.List;
+
 import lombok.Data;
 
 @Data
@@ -12,4 +14,6 @@ public class ProductVO {
 	private String product_explain;
 	private int product_stock;
 	private int product_sales;
+	
+	private List<ProductImageVO> imageList;
 }
