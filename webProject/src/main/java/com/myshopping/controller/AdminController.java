@@ -49,6 +49,10 @@ public class AdminController {
 	
 	@PostMapping("/adminProductRegister")
 	public String adminProductRegister(ProductVO product, RedirectAttributes rttr) {
+		
+		if(product.getImageList() != null) {
+			product.getImageList().forEach(image -> log.info(image));
+		}
 		productService.Register(product);
 		
 		rttr.addFlashAttribute("result", product.getProduct_code());

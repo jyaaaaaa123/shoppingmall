@@ -15,6 +15,15 @@
 		values (seq_product.nextval, #{product_ctgr}, #{product_name}, #{product_price}, #{product_explain}, #{product_stock}, #{product_sales})
 	</insert>
 	
+	<insert id="insertSelectKey">
+		<selectKey keyProperty="product_code" order="BEFORE"
+			resultType="long">
+			select seq_product.nextval from dual	
+		</selectKey>
+		insert into tbl_product (PRODUCT_CODE, PRODUCT_CTGR, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_EXPLAIN, PRODUCT_STOCK, PRODUCT_SALES)
+		values (#{product_code}, #{product_ctgr}, #{product_name}, #{product_price}, #{product_explain}, #{product_stock}, #{product_sales})
+	</insert>
+	
 	<select id="read" resultType="com.myshopping.domain.ProductVO">
 		select * from tbl_product where product_code = #{product_code}
 	</select>

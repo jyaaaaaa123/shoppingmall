@@ -2,29 +2,49 @@ package com.myshopping.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.myshopping.domain.CommentVO;
 import com.myshopping.domain.OrderProductVO;
 import com.myshopping.domain.ProductCommentVO;
 import com.myshopping.domain.ProductVO;
 import com.myshopping.mapper.CommentMapper;
+import com.myshopping.mapper.ProductImageMapper;
 import com.myshopping.mapper.ProductMapper;
 
 import lombok.AllArgsConstructor;
+import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 
 @Service
 @Log4j
-@AllArgsConstructor
 public class ProductServiceImpl implements ProductService {
 	
+	
+	@Setter(onMethod_ = {@Autowired})
 	private ProductMapper mapper;
+	
+	@Setter(onMethod_ = {@Autowired})
 	private CommentMapper commentMapper;
 	
+	@Setter(onMethod_ = {@Autowired})
+	private ProductImageMapper imageMapper;
+	
+	@Transactional
 	@Override
 	public void Register(ProductVO product) {
-		mapper.insert(product);
+		mapper.insertSelectKey(product);
+		
+		if(product.getImageList() == null || product.getImageList().size() <= 0) {
+			return;
+		}
+		
+		product.getImageList().forEach(image -> {
+			image.setProduct_code(product.getProduct_code());
+			imageMapper.insert(image);
+		});
 	}
 
 	@Override
@@ -77,7 +97,6 @@ public class ProductServiceImpl implements ProductService {
 	public List<CommentVO> getCommentByProduct(Long product_code) {
 		return commentMapper.getCommentByProduct(product_code);
 	}
-
 	
 
 }
