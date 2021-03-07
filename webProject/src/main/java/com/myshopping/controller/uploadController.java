@@ -54,7 +54,7 @@ public class uploadController {
 		
 		List<ProductImageVO> list = new ArrayList<ProductImageVO>();
 		
-		String uploadFolder = "C:\\upload";
+		String uploadFolder = "/resources/image/product";
 		
 		File uploadPath = new File(uploadFolder, getFolder());
 		

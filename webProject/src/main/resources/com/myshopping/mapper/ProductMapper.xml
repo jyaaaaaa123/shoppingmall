@@ -24,12 +24,38 @@
 		values (#{product_code}, #{product_ctgr}, #{product_name}, #{product_price}, #{product_explain}, #{product_stock}, #{product_sales})
 	</insert>
 	
+	<resultMap type="com.myshopping.domain.ProductVO" id="productMap">
+		<id property="product_code" column="product_code"/>
+		<result property="product_code" column="product_code"/>
+		<result property="product_ctgr" column="product_ctgr"/>
+		<result property="product_name" column="product_name"/>
+		<result property="product_price" column="product_price"/>
+		<result property="product_explain" column="product_explain"/>
+		<result property="product_stock" column="product_stock"/>
+		<result property="product_sales" column="product_sales"/>
+		<collection property="imageList" resultMap="imageMap">
+		</collection>
+	</resultMap>
+	
+	<resultMap type="com.myshopping.domain.ProductImageVO" id="imageMap">
+		<result property="uuid" column="uuid"/>
+		<result property="uploadPath" column="uploadPath"/>
+		<result property="fileName" column="fileName"/>
+		<result property="fileType" column="filetype"/>
+		<result property="product_code" column="product_code"/>
+	</resultMap>
+	
+	
 	<select id="read" resultType="com.myshopping.domain.ProductVO">
 		select * from tbl_product where product_code = #{product_code}
 	</select>
 	
-	<select id="readCategori" resultType="com.myshopping.domain.ProductVO">
-		select * from tbl_product where product_ctgr = #{product_ctgr}
+	<select id="readCategori" resultMap="productMap">
+		select * 
+		from tbl_product tp
+			LEFT OUTER JOIN tbl_product_image tpi
+			ON tp.product_code = tpi.product_code 
+			where product_ctgr = #{product_ctgr}
 	</select>
 	
 	<select id="readBestProduct" resultType="com.myshopping.domain.ProductVO">
@@ -38,9 +64,15 @@
 		]]>
 	</select>
 	
-	<select id="readBestProductHome" resultType="com.myshopping.domain.ProductVO">
+	<select id="readBestProductHome" resultMap="productMap">
 		<![CDATA[
-		SELECT * FROM (SELECT * FROM TBL_PRODUCT  ORDER BY PRODUCT_SALES DESC) WHERE ROWNUM <= 5
+		SELECT * FROM 
+			(SELECT * FROM 
+				TBL_PRODUCT tp
+				LEFT OUTER JOIN tbl_product_image tpi
+				ON tp.product_code = tpi.product_code
+				ORDER BY PRODUCT_SALES DESC) 
+			WHERE ROWNUM <= 5
 		]]>
 	</select>
 	
