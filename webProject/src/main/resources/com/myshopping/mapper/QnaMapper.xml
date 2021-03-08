@@ -5,11 +5,11 @@
 <mapper namespace="com.myshopping.mapper.QnaMapper">
 	
 	<select id="realAllList" resultType="com.myshopping.domain.QnaVO">
-		select * from tbl_qna
+		select * from tbl_qna order by qna_code DESC
 	</select>
 	
 	<select id="readList" resultType="com.myshopping.domain.QnaVO">
-		select * from tbl_qna where userid = #{userid}		
+		select * from tbl_qna where userid = #{userid} order by qna_code DESC
 	</select>
 	
 	<insert id="insert">

@@ -12,5 +12,6 @@ public class QnaVO {
 	private String qna_content;
 	private String userid;
 	private Date qna_date;
-
+	
+	private boolean qna_reply_ok;
 }

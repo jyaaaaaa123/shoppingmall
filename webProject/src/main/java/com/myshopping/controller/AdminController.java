@@ -99,6 +99,11 @@ public class AdminController {
 		return "redirect:/";
 	}
 	
+	@GetMapping("/adminQnaGet")
+	public void adminQna(@RequestParam("qna_code") Long qna_code, Model model) {
+		model.addAttribute("qna", qnaService.get(qna_code));
+	}
+	
 	@GetMapping("/adminQna")
 	public void adminQna(Model model) {
 		model.addAttribute("qnaList", qnaService.realAllList());

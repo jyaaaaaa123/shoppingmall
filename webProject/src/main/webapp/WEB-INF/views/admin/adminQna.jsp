@@ -7,6 +7,12 @@
 	prefix="sec"%>
 
 <%@ include file="../includes/header.jsp"%>
+<style type="text/css">
+	#a_title:link { color: black; text-decoration: none;}
+ 	#a_title:visited { color: black; text-decoration: none;}
+ 	#a_title:hover { color: black; text-decoration: underline;}
+</style>
+
 <div class="container-fluid">
 	<div class="row">
 		<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
@@ -43,17 +49,24 @@
 									<th>제목</th>
 									<th>작성자</th>
 									<th>날짜</th>
-									<th>조회수</th>
+									<th>답변여부</th>
 								</tr>
 							</thead>
 							<tbody>
 								<c:forEach var="qna" items="${qnaList}">
 								<tr>
 									<td><c:out value="${qna.qna_code}"/></td>
-									<td><c:out value="${qna.qna_title}"/></td>
+									<td><a id="a_title" href="/admin/adminQnaGet?qna_code=<c:out value='${qna.qna_code}'/>" style=""><c:out value="${qna.qna_title}"/></a></td>
 									<td><c:out value="${qna.userid}"/></td>
 									<td><c:out value="${qna.qna_date}"/></td>
-									<td>0</td>
+									<c:choose>
+										<c:when test="${qna.qna_reply_ok}">
+											<td>YES</td>
+										</c:when>
+										<c:when test="${!qna.qna_reply_ok}">
+											<td>NO</td>
+										</c:when>
+									</c:choose>
 								</tr>
 								</c:forEach>
 							</tbody>

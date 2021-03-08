@@ -28,6 +28,24 @@ public class QnaServiceImpl implements QnaService {
 		return mapper.readList(userid);
 	}
 
-	
+	@Override
+	public void create(QnaVO qna) {
+		mapper.insert(qna);
+	}
+
+	@Override
+	public void modify(QnaVO qna) {
+		mapper.update(qna);
+	}
+
+	@Override
+	public void remove(Long qna_code) {
+		mapper.delete(qna_code);
+	}
+
+	@Override
+	public QnaVO get(Long qna_code) {
+		return mapper.read(qna_code);
+	}
 
 }
