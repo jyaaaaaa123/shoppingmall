@@ -10,6 +10,21 @@
 	]]>
 	</select>
 	
+	<select id="getListWithPaging" resultType="com.myshopping.domain.ProductVO">
+		<![CDATA[
+			select
+				* 
+				from 
+					(select /*+ INDEX_DESC(tbl_product pk_product)*/
+						rownum rn, product_code, product_ctgr, product_name, 
+						product_price, product_explain, product_stock, product_sales, product_regdate
+						from tbl_product
+						where rownum <= #{pageNum} * #{amount}
+					)
+					where rn > (#{pageNum} - 1) * #{amount}
+		]]>
+	</select>
+	
 	<insert id="insert">
 		insert into tbl_product (PRODUCT_CODE, PRODUCT_CTGR, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_EXPLAIN, PRODUCT_STOCK, PRODUCT_SALES)
 		values (seq_product.nextval, #{product_ctgr}, #{product_name}, #{product_price}, #{product_explain}, #{product_stock}, #{product_sales})
@@ -50,12 +65,20 @@
 		select * from tbl_product where product_code = #{product_code}
 	</select>
 	
-	<select id="readCategori" resultMap="productMap">
-		select * 
-		from tbl_product tp
-			LEFT OUTER JOIN tbl_product_image tpi
-			ON tp.product_code = tpi.product_code 
-			where product_ctgr = #{product_ctgr}
+	<select id="readCategori" resultMap="productMap" parameterType="map">
+		<![CDATA[
+		select *
+		from (select /*+ INDEX_DESC(tbl_product pk_product)*/ 
+				rownum rn, tp.product_code, tp.product_ctgr, tp.product_name, 
+				tp.product_price, tp.product_explain, tp.product_stock, tp.product_sales, tp.product_regdate,
+				tpi.uuid, tpi.uploadPath, tpi.fileName, tpi.filetype
+				from tbl_product tp
+				LEFT OUTER JOIN tbl_product_image tpi
+				ON tp.product_code = tpi.product_code 
+				where product_ctgr = #{product_ctgr} AND rownum <= (#{cri.pageNum} * #{cri.amount})
+			)
+		where rn > (#{cri.pageNum} - 1) * #{cri.amount}
+		]]>
 	</select>
 	
 	<select id="readBestProduct" resultType="com.myshopping.domain.ProductVO">

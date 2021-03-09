@@ -3,6 +3,7 @@ package com.myshopping.service;
 import java.util.List;
 
 import com.myshopping.domain.CommentVO;
+import com.myshopping.domain.Criteria;
 import com.myshopping.domain.OrderProductVO;
 import com.myshopping.domain.ProductCommentVO;
 import com.myshopping.domain.ProductVO;
@@ -17,7 +18,7 @@ public interface ProductService {
 	
 	public boolean remove(Long product_code);
 	
-	public List<ProductVO> getCtgrList(String product_ctgr);
+	public List<ProductVO> getCtgrList(String product_ctgr, Criteria cri);
 	
 	public List<ProductVO> getBestListHome();
 	

@@ -66,10 +66,11 @@
 				<div class="col-md-10">
 					<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
 						<div class="col-auto d-none d-lg-block">
-							<img src="<c:out value="${product.imageList[0].uploadPath}"/>/<c:out value="${product.imageList[0].fileName}"/>">
+							<img src="<c:out value="${product.imageList[0].uploadPath}"/><c:out value="${product.imageList[0].fileName}"/>">
 						</div>
 						<div class="col-md-auto p-3 d-flex flex-fill flex-column position-static">
 							<strong class="d-inline-block mb-2 text-primary"><c:out value="${product.product_ctgr}" /></strong>
+							<c:set var="nowCtgr" value="${product.product_ctgr}"/>
 							<h3 class="mb-0"><c:out value="${product.product_name}" /></h3>
 							<div class="mb-1 text-muted"><c:out value="${product.product_price}" /></div>
 							<p class="card-text mb-auto"><c:out value="${product.product_explain}" /></p>
@@ -89,9 +90,49 @@
 					</div>
 				</div>
 				</c:forEach>
+				<!-- pagination -->
+				<nav>
+				  <ul class="pagination">
+				  	<c:if test="${pageMaker.prev}">
+				    <li class="paginate_button previous">
+				      <a class="page-link" href="<c:out value='${pageMaker.startPage - 1}'/>">Prev</a>
+				    </li>
+				    </c:if>
+				    <c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
+						<li class="page-item <c:out value="${pageMaker.cri.pageNum == num ? 'active':'' }"/>"><a class="page-link" href="<c:out value='${num}'/>"><c:out value="${num}"/></a></li>				    
+				    </c:forEach>
+				    <c:if test="${pageMaker.next}">
+				    <li class="paginate_button next">
+				      <a class="page-link" href="<c:out value='${pageMaker.endPage + 1}'/>">Next</a>
+				    </li>
+				    </c:if>
+				  </ul>
+				</nav>
+				<!-- end pagenation -->
 			</div>
 		</main>
 	</div>
 </div>
+
+<form id="pageForm" action="/product/list" method="get">
+	<input type="hidden" name="product_ctgr" value='${pageMaker.nowPage}'>
+	<input type="hidden" name="pageNum" value='${pageMaker.cri.pageNum}'>
+	<input type="hidden" name="amount" value='${pageMaker.cri.amount}'>
+</form>
+
+<script>
+$(document).ready(function(){
+	
+	var pageForm = $("#pageForm");
+	
+	$(".page-item a").on("click", function(e){
+		e.preventDefault();
+		
+		pageForm.find("input[name='pageNum']").val($(this).attr("href"));
+		pageForm.submit();
+	});
+	
+});
+</script>
 
 <%@ include file="../includes/footer.jsp"%>

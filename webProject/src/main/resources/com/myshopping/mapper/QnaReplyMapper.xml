@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myshopping.mapper.QnaReplyMapper">
+	
+	<insert id="create">
+		insert into tbl_qna_reply
+			(qna_code, qna_reply_code, qna_reply)
+		values (#{qna_code}, seq_qna_reply_code.nextval, #{qna_reply})
+	</insert>
+	
+	<select id="read" resultType="com.myshopping.domain.QnaReplyVO">
+		select * from tbl_qna_reply where qna_reply_code = #{qna_reply_code}
+	</select>
+	
+	<update id="update">
+		update tbl_qna_reply set
+			qna_reply = #{qna_reply},
+			qna_replydate = sysdate
+			where qna_reply_code = #{qna_reply_code}
+	</update>
+	
+	<delete id="delete">
+		delete from tbl_qna_reply where qna_reply_code = #{qna_reply_code}
+	</delete>
+	
+	<select id="getByQnaCode" resultType="com.myshopping.domain.QnaReplyVO">
+		select * from tbl_qna_reply where qna_code = #{qna_code} order by qna_reply_code asc
+	</select>
+</mapper>

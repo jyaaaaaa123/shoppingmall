@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.myshopping.domain.Criteria;
+import com.myshopping.domain.PageDTO;
 import com.myshopping.domain.ProductVO;
 import com.myshopping.service.ProductService;
 
@@ -24,10 +26,10 @@ public class ProductController {
 	
 	//카테고리 별 목록 조회
 	@GetMapping("/list")
-	public void getlist(@RequestParam("product_ctgr") String product_ctgr, Model model) {
-		log.info("/get");
-		model.addAttribute("product", service.getCtgrList(product_ctgr));
+	public void getlist(Model model, Criteria cri, @RequestParam("product_ctgr") String product_ctgr) {
+		model.addAttribute("product", service.getCtgrList(product_ctgr, cri));
 		model.addAttribute("best", service.getBestList(product_ctgr));
+		model.addAttribute("pageMaker", new PageDTO(cri, 123, product_ctgr));
 	}
 	
 	//상품 등록 redirect 추가

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.myshopping.domain.CommentVO;
+import com.myshopping.domain.Criteria;
 import com.myshopping.domain.OrderProductVO;
 import com.myshopping.domain.ProductCommentVO;
 import com.myshopping.domain.ProductVO;
@@ -68,8 +69,8 @@ public class ProductServiceImpl implements ProductService {
 	}
 	
 	@Override
-	public List<ProductVO> getCtgrList(String product_ctgr) {
-		return mapper.readCategori(product_ctgr);
+	public List<ProductVO> getCtgrList(String product_ctgr, Criteria cri) {
+		return mapper.readCategori(product_ctgr, cri);
 	}
 
 	@Override
