@@ -74,7 +74,7 @@
 							<h3 class="mb-0"><c:out value="${product.product_name}" /></h3>
 							<div class="mb-1 text-muted"><c:out value="${product.product_price}" /></div>
 							<p class="card-text mb-auto"><c:out value="${product.product_explain}" /></p>
-							<a href="/product/selectProduct?product_code=${product.product_code}" class="stretched-link">상세정보 확인</a>
+							<a id="moveSelect" href="<c:out value='${product.product_code}'/>" class="stretched-link">상세정보 확인</a>
 						</div>
 						<div class="col d-flex align-items-end flex-column">
 							<p>
@@ -130,6 +130,15 @@ $(document).ready(function(){
 		
 		pageForm.find("input[name='pageNum']").val($(this).attr("href"));
 		pageForm.submit();
+	});
+	
+	$("#moveSelect").on("click", function(e){
+		e.preventDefault();
+		
+		pageForm.find("input[name='product_ctgr']").remove();
+		pageForm.append("<input type='hidden' name='product_code' value='" + $(this).attr("href") + "'>");
+		pageForm.attr("action", "/product/selectProduct");
+		pageForm.submit();0
 	});
 	
 });

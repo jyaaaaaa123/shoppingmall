@@ -98,6 +98,11 @@ public class ProductServiceImpl implements ProductService {
 	public List<CommentVO> getCommentByProduct(Long product_code) {
 		return commentMapper.getCommentByProduct(product_code);
 	}
+
+	@Override
+	public int getTotalCount(String product_ctgr, Criteria cri) {
+		return mapper.getTotalCount(product_ctgr, cri);
+	}
 	
 
 }

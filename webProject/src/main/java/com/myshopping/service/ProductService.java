@@ -31,4 +31,6 @@ public interface ProductService {
 	public int updateProductSales(OrderProductVO op);
 	
 	public List<CommentVO> getCommentByProduct(Long product_code);
+	
+	public int getTotalCount(String product_ctgr, Criteria cri);
 }

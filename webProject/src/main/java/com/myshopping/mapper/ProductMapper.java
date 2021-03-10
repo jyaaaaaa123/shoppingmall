@@ -22,7 +22,6 @@ public interface ProductMapper {
 	
 	public void insertSelectKey(ProductVO product);
 	
-	
 	//상품코드로 가져오기 R
 	public ProductVO read(Long product_code);
 	
@@ -45,4 +44,7 @@ public interface ProductMapper {
 	
 	//update sales
 	public int updateProductSales(OrderProductVO op);
+	
+	//get total product by ctgr
+	public int getTotalCount(@Param("product_ctgr") String product_ctgr, @Param("cri") Criteria cri);
 }

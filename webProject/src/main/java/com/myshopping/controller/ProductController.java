@@ -29,7 +29,9 @@ public class ProductController {
 	public void getlist(Model model, Criteria cri, @RequestParam("product_ctgr") String product_ctgr) {
 		model.addAttribute("product", service.getCtgrList(product_ctgr, cri));
 		model.addAttribute("best", service.getBestList(product_ctgr));
-		model.addAttribute("pageMaker", new PageDTO(cri, 123, product_ctgr));
+		
+		int total = service.getTotalCount(product_ctgr, cri);
+		model.addAttribute("pageMaker", new PageDTO(cri, total, product_ctgr));
 	}
 	
 	//상품 등록 redirect 추가
