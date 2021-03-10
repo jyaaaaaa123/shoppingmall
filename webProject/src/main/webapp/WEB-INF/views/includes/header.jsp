@@ -16,8 +16,10 @@
 <body>
     <header class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-body border-bottom shadow-sm">
         <p class="h5 my-0 fw-normal"><a style="color: black; text-decoration:none; " href="/">Company name</a></p>
-        <form class="d-flex mx-auto w-25">
-            <input type="search" class="form-control"  placeholder="Search" aria-label="Search">
+        <form id="searchForm" class="d-flex mx-auto w-25" action="/product/search" method="get">
+            <input type="text" class="form-control" name="product_name">
+			<input type="hidden" name="pageNum" value='1'>
+			<input type="hidden" name="amount" value='5'>
             <button type="submit" class="btn btn-outline-success col-2 md-auto">검색</button>
         </form>
            <nav class="my-2 my-md-0 me-md-3">

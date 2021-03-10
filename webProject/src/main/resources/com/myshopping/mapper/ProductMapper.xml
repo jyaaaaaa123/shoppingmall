@@ -60,7 +60,6 @@
 		<result property="product_code" column="product_code"/>
 	</resultMap>
 	
-	
 	<select id="read" resultType="com.myshopping.domain.ProductVO">
 		select * from tbl_product where product_code = #{product_code}
 	</select>
@@ -80,6 +79,24 @@
 		where rn > (#{cri.pageNum} - 1) * #{cri.amount}
 		]]>
 	</select>
+	
+	
+	<select id="search" resultMap="productMap">
+		<![CDATA[
+		select *
+			from ( select rownum rn, tp.product_code, tp.product_ctgr, tp.product_name, 
+				tp.product_price, tp.product_explain, tp.product_stock, tp.product_sales, tp.product_regdate,
+				tpi.uuid, tpi.uploadPath, tpi.fileName, tpi.filetype
+				from tbl_product tp
+				LEFT OUTER JOIN tbl_product_image tpi
+				ON tp.product_code = tpi.product_code
+				where (product_name like '%'||#{product_name}||'%' or product_ctgr like '%'||#{product_name}||'%')
+				AND rownum <= (#{cri.pageNum} * #{cri.amount})
+				)
+			where rn > (#{cri.pageNum} - 1) * #{cri.amount}	
+		]]>
+	</select>
+	
 	
 	<select id="readBestProduct" resultType="com.myshopping.domain.ProductVO">
 		<![CDATA[
@@ -128,6 +145,10 @@
 	
 	<select id="getTotalCount" resultType="int">
 		select count(*) from tbl_product where product_ctgr = #{product_ctgr}
+	</select>
+	
+	<select id="getSearchCount" resultType="int">
+		select count(*) from tbl_product where (product_ctgr like '%'||#{product_name}||'%' or product_name like '%'||#{product_name}||'%')
 	</select>
 	
 </mapper>

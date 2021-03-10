@@ -34,18 +34,18 @@ public class ProductController {
 		model.addAttribute("pageMaker", new PageDTO(cri, total, product_ctgr));
 	}
 	
-	//상품 등록 redirect 추가
-	@PostMapping("/register")
-	public String register(ProductVO product, RedirectAttributes rttr) {
-		service.Register(product);
-		rttr.addFlashAttribute("result", product.getProduct_code());
-		return null;//"redirect:/product/?"
-	}
 	
 	@GetMapping("/selectProduct")
 	public void getSelect(@RequestParam("product_code") Long product_code, Model model) {
 		model.addAttribute("selectedProduct", service.get(product_code));
 		model.addAttribute("List", service.getCommentByProduct(product_code));
-		System.out.println(model);
+	}
+	
+	@GetMapping("/search")
+	public void searchList(Model model, @RequestParam("product_name") String product_name, Criteria cri) {
+		
+		model.addAttribute("product", service.search(product_name, cri));
+		int total = service.getSearchCount(product_name, cri);
+		model.addAttribute("pageMaker", new PageDTO(cri, total, product_name));
 	}
 }

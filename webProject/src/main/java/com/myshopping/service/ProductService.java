@@ -2,6 +2,8 @@ package com.myshopping.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.myshopping.domain.CommentVO;
 import com.myshopping.domain.Criteria;
 import com.myshopping.domain.OrderProductVO;
@@ -33,4 +35,8 @@ public interface ProductService {
 	public List<CommentVO> getCommentByProduct(Long product_code);
 	
 	public int getTotalCount(String product_ctgr, Criteria cri);
+	
+	public List<ProductVO> search(String product_name, @Param("cri") Criteria cri);
+	
+	public int getSearchCount(String product_name, Criteria cri);
 }

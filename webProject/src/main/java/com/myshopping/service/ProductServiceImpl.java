@@ -2,6 +2,7 @@ package com.myshopping.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -102,6 +103,16 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public int getTotalCount(String product_ctgr, Criteria cri) {
 		return mapper.getTotalCount(product_ctgr, cri);
+	}
+
+	@Override
+	public List<ProductVO> search(String product_name, @Param("cri") Criteria cri) {
+		return mapper.search(product_name, cri);
+	}
+
+	@Override
+	public int getSearchCount(String product_name, Criteria cri) {
+		return mapper.getSearchCount(product_name, cri);
 	}
 	
 

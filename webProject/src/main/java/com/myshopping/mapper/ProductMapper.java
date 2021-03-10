@@ -22,11 +22,14 @@ public interface ProductMapper {
 	
 	public void insertSelectKey(ProductVO product);
 	
-	//상품코드로 가져오기 R
+	//상품코드로 가져오기
 	public ProductVO read(Long product_code);
 	
 	//카테고리로 가져오기
 	public List<ProductVO> readCategori(@Param("product_ctgr") String product_ctgr, @Param("cri") Criteria cri);
+	
+	//검색
+	public List<ProductVO> search(@Param("product_name") String product_name, @Param("cri") Criteria cri);
 	
 	//인기상품 조회
 	public List<ProductVO> readBestProduct(String product_ctgr);
@@ -47,4 +50,7 @@ public interface ProductMapper {
 	
 	//get total product by ctgr
 	public int getTotalCount(@Param("product_ctgr") String product_ctgr, @Param("cri") Criteria cri);
+	
+	//get total search
+	public int getSearchCount(@Param("product_name") String product_name, @Param("cri") Criteria cri);
 }
