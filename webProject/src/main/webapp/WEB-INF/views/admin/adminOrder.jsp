@@ -58,34 +58,43 @@
 	</div>
 </div>
 <script type="text/javascript">
-$("[id^=btnOrderComplete]").on("click", function() {
-	var id = $(this).attr("id");
-	var code = id.replace("btnOrderComplete", "");
-	
-	
-	var data = {
-			order_code : code
-	};
-	
-	var token = $("meta[name='_csrf']").attr("content");
-	var header = $("meta[name='_csrf_header']").attr("content");
-	$.ajaxPrefilter(function(options, originalOptions, jqXHR) {
-		if (options['type'].toLowerCase() === 'post') {
-			jqXHR.setRequestHeader(header, token)
-		}
-	});
-	
-	$.ajax({
-			url: '/admin/adminOrderCom',
-			type: 'post',
-			data: data,
-			success: function(){
-				alert("성공");
-			},
-			error: function() {
-				alert("실패");
+$(document).ready(function(){
+	$("[id^=btnOrderComplete]").on("click", function() {
+		var id = $(this).attr("id");
+		var code = id.replace("btnOrderComplete", "");
+		
+		
+		var data = {
+				order_code : code
+		};
+		
+		var token = $("meta[name='_csrf']").attr("content");
+		var header = $("meta[name='_csrf_header']").attr("content");
+		$.ajaxPrefilter(function(options, originalOptions, jqXHR) {
+			if (options['type'].toLowerCase() === 'post') {
+				jqXHR.setRequestHeader(header, token)
 			}
 		});
+		
+		var completConfirm = confirm("주문 완료 처리 하시겠습니까?");
+		
+		if(completConfirm) {
+			$.ajax({
+				url: '/admin/adminOrderCom',
+				type: 'post',
+				data: data,
+				success: function(){
+					alert("주문 완료 처리 되었습니다");
+					window.location.reload();
+				},
+				error: function() {
+					alert("주문 완료 처리 실패");
+				}
+			});
+		} else {
+			return;
+		}
 	});
+});
 </script>
 <%@ include file="../includes/footer.jsp"%>

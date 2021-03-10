@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -47,6 +48,7 @@ public class AdminController {
 		
 	}
 	
+	@Transactional
 	@PostMapping("/adminProductRegister")
 	public String adminProductRegister(ProductVO product, RedirectAttributes rttr) {
 		
@@ -84,19 +86,16 @@ public class AdminController {
 	
 	@ResponseBody
 	@PostMapping("/adminOrderCom")
-	public String adminOrderComplete(@RequestParam("order_code") String order_code) {
+	public void adminOrderComplete(@RequestParam("order_code") String order_code) {
 		
 		orderService.updateOrderComplete(order_code);
 		
 		List<OrderProductVO> opList = orderService.getOrderProductList(order_code);
-		System.out.println(opList);
 		
 		for(OrderProductVO op : opList) {
 			productService.updateProductSales(op);
 			productService.updateProductStock(op);
 		}
-		
-		return "redirect:/";
 	}
 	
 	@GetMapping("/adminQnaGet")

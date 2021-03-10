@@ -63,12 +63,11 @@
           	var formObj = $('form');
           	$("#orderBtn").on("click", function(e) {
           		e.preventDefault();
-          		var con;
-          		con = confirm("이대로 결제하시겠습니까?");
+          		var con = confirm("이대로 결제하시겠습니까?");
           		if(con){
           			formObj.submit();
           		} else {
-          			console.log("no");
+          			alert("주문 실패");
           		}
           	})
           </script>

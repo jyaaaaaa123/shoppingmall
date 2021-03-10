@@ -45,18 +45,18 @@
 			</div>
 			<!-- /.row -->
 			<div class="row">
-				<ul class="nav nav-tabs">
+				<ul id="sort" class="nav nav-tabs">
 					<li class="nav-item">
-						<a class="nav-link active" aria-current="page" href="#">이름순</a>
+						<a id="sortName" class="nav-link active">이름순</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#" role="button" aria-expanded="false">등록순</a>
+						<a id="sortRegi" class="nav-link">등록순</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">낮은 가격순</a>
+						<a id="sortPriceD" class="nav-link">낮은 가격순</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#" tabindex="-1" aria-disabled="true">높은 가격순</a>
+						<a id="sortPriceU" class="nav-link">높은 가격순</a>
 					</li>
 				</ul>
 			</div>
@@ -141,6 +141,13 @@ $(document).ready(function(){
 		pageForm.submit();0
 	});
 	
+	
+	$("#sort li a").on("click", function(e){
+		e.preventDefault();
+		
+		var sortType = $(this).attr("id");
+		alert(sortType);
+	});
 });
 </script>
 

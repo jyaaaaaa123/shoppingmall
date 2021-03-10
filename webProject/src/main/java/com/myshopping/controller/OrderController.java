@@ -6,6 +6,7 @@ import java.util.UUID;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,6 +38,7 @@ public class OrderController {
 		model.addAttribute("cartList", orderService.getListCart(member.getUsername()));
 	}
 	
+	@Transactional
 	@PostMapping("/order")
 	public String order(OrderVO order, OrderProductVO orderProduct) {
 		UserDetails member = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

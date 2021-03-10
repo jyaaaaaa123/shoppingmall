@@ -131,13 +131,13 @@
 		where product_code = #{product_code}
 	</update>
 	
-	<update id="updateProductStock">
+	<update id="updateProductStock" parameterType="com.myshopping.domain.OrderProductVO">
 		update tbl_product
 		set product_stock = product_stock - #{order_product_stock}
 		where product_code = #{product_code}
 	</update>
 	
-	<update id="updateProductSales">
+	<update id="updateProductSales" parameterType="com.myshopping.domain.OrderProductVO">
 		update tbl_product
 		set product_sales = product_sales + #{order_product_stock}
 		where product_code = #{product_code}
