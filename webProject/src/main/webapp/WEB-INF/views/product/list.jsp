@@ -47,16 +47,44 @@
 			<div class="row">
 				<ul id="sort" class="nav nav-tabs">
 					<li class="nav-item">
-						<a id="sortName" class="nav-link active">이름순</a>
+						<c:choose>
+						<c:when test="${pageMaker.cri.type == 'sortRegi'}">
+							<a id="sortRegi" class="nav-link active" href="#">등록순</a>
+						</c:when>
+						<c:otherwise> 
+							<a id="sortRegi" class="nav-link" href="#">등록순</a>
+						</c:otherwise>
+						</c:choose>
 					</li>
 					<li class="nav-item">
-						<a id="sortRegi" class="nav-link">등록순</a>
+						<c:choose>
+						<c:when test="${pageMaker.cri.type == 'sortName'}">
+							<a id="sortName" class="nav-link active" href="#">이름순</a>
+						</c:when>
+						<c:otherwise> 
+							<a id="sortName" class="nav-link" href="#">이름순</a>
+						</c:otherwise>
+						</c:choose>
 					</li>
 					<li class="nav-item">
-						<a id="sortPriceD" class="nav-link">낮은 가격순</a>
+						<c:choose>
+						<c:when test="${pageMaker.cri.type == 'sortPriceD'}">
+							<a id="sortPriceD" class="nav-link active" href="#">낮은 가격순</a>
+						</c:when>
+						<c:otherwise> 
+							<a id="sortPriceD" class="nav-link" href="#">낮은 가격순</a>
+						</c:otherwise>
+						</c:choose>
 					</li>
 					<li class="nav-item">
-						<a id="sortPriceU" class="nav-link">높은 가격순</a>
+						<c:choose>
+						<c:when test="${pageMaker.cri.type == 'sortPriceU'}">
+							<a id="sortPriceU" class="nav-link active" href="#">높은 가격순</a>
+						</c:when>
+						<c:otherwise> 
+							<a id="sortPriceU" class="nav-link" href="#">높은 가격순</a>
+						</c:otherwise>
+						</c:choose>
 					</li>
 				</ul>
 			</div>
@@ -66,7 +94,7 @@
 				<div class="col-md-10">
 					<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
 						<div class="col-auto d-none d-lg-block">
-							<img src="<c:out value="${product.imageList[0].uploadPath}"/><c:out value="${product.imageList[0].fileName}"/>">
+							<img src="<c:out value="${product.imageList[0].uploadPath}"/>/<c:out value="${product.imageList[0].fileName}"/>">
 						</div>
 						<div class="col-md-auto p-3 d-flex flex-fill flex-column position-static">
 							<strong class="d-inline-block mb-2 text-primary"><c:out value="${product.product_ctgr}" /></strong>
@@ -143,11 +171,19 @@ $(document).ready(function(){
 	
 	
 	$("#sort li a").on("click", function(e){
-		e.preventDefault();
-		
+		var nowPage = getParameterByName("product_ctgr"); 
 		var sortType = $(this).attr("id");
-		alert(sortType);
+		var parameter = "?product_ctgr=" + nowPage + "&type=" + sortType;
+		$(this).attr("href", "/product/list" + parameter); 
 	});
+	
+	function getParameterByName(name) {
+        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                results = regex.exec(location.search);
+        return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+    }
+	
 });
 </script>
 

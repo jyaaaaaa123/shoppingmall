@@ -67,7 +67,7 @@
 	<select id="readCategori" resultMap="productMap" parameterType="map">
 		<![CDATA[
 		select *
-		from (select /*+ INDEX_DESC(tbl_product pk_product)*/ 
+		from (select 
 				rownum rn, tp.product_code, tp.product_ctgr, tp.product_name, 
 				tp.product_price, tp.product_explain, tp.product_stock, tp.product_sales, tp.product_regdate,
 				tpi.uuid, tpi.uploadPath, tpi.fileName, tpi.filetype
@@ -77,6 +77,22 @@
 				where product_ctgr = #{product_ctgr} AND rownum <= (#{cri.pageNum} * #{cri.amount})
 			)
 		where rn > (#{cri.pageNum} - 1) * #{cri.amount}
+		]]>
+		<choose>
+			<when test="cri.type == 'sortPriceD'">
+				order by product_price asc
+			</when>
+			<when test="cri.type == 'sortPriceU'">
+				order by product_price desc
+			</when>
+			<when test="cri.type == 'sortName'">
+				order by product_name asc
+			</when>
+			<otherwise>
+				order by product_code desc
+			</otherwise>
+		</choose>
+		<![CDATA[
 		]]>
 	</select>
 	

@@ -10,7 +10,6 @@ public class PageDTO {
 	private boolean prev, next;
 	private String nowPage;
 	
-	
 	private int total;
 	private Criteria cri;
 	

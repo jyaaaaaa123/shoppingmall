@@ -11,6 +11,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -50,13 +52,14 @@ public class uploadController {
 	
 	@PostMapping(value = "/uploadFormAction", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
-	public ResponseEntity<List<ProductImageVO>> uploadFormPost(MultipartFile[] uploadFile, Model model){
+	public ResponseEntity<List<ProductImageVO>> uploadFormPost(MultipartFile[] uploadFile, Model model, HttpServletRequest req){
 		
 		List<ProductImageVO> list = new ArrayList<ProductImageVO>();
 		
-		String uploadFolder = "/resources/image/product";
+		String uploadFolder = "C:/Users/jy/git/shoppingmall/webProject/src/main/webapp/resources/image/product"; 
 		
-		File uploadPath = new File(uploadFolder, getFolder());
+		
+		File uploadPath = new File(uploadFolder, getFolder()); //오늘 날짜 경로 생성 parent, child
 		
 		if (uploadPath.exists() == false) { //file exist check 
 			uploadPath.mkdirs(); //make file
@@ -82,7 +85,9 @@ public class uploadController {
 			
 				multipartFile.transferTo(saveFile);
 				
-				productImage.setUploadPath(uploadPath.getCanonicalPath());
+				String savePath = uploadPath.getCanonicalPath().split("webapp")[1];
+				
+				productImage.setUploadPath(savePath);
 				productImage.setUuid(uuid.toString());
 				productImage.setFileName(uploadFileName);
 				
@@ -108,7 +113,7 @@ public class uploadController {
 		File file;
 		
 		try {
-			file = new File(URLDecoder.decode(fileName, "UTF-8"));
+			file = new File(URLDecoder.decode("C:/Users/jy/git/shoppingmall/webProject/src/main/webapp" + fileName, "UTF-8"));
 			
 			file.delete();
 			
