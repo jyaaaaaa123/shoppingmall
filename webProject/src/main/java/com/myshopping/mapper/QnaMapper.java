@@ -22,4 +22,7 @@ public interface QnaMapper {
 	//delete
 	public int delete(Long qna_code);
 	
+	//update reply complete
+	public int updateReply(Long qna_code);
+	
 }

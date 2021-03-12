@@ -32,4 +32,10 @@
 	<delete id="delete">
 		delete from tbl_qna where qna_code = #{qna_code}
 	</delete>
+	
+	<update id="updateReply">
+		update tbl_qna
+		set qna_reply_ok = '1'
+		where qna_code = #{qna_code}
+	</update>
 </mapper>

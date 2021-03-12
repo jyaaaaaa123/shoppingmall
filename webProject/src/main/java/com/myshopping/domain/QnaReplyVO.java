@@ -9,7 +9,7 @@ public class QnaReplyVO {
 	
 	private Long qna_code;
 	private Long qna_reply_code;
-	
+	private String qna_reply_title;
 	private String qna_reply;
 	private Date qna_replydate;
 	

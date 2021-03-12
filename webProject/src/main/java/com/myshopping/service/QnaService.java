@@ -17,4 +17,6 @@ public interface QnaService {
 	public void modify(QnaVO qna);
 	
 	public void remove(Long qna_code);
+	
+	public int updateReply(Long qna_code);
 }

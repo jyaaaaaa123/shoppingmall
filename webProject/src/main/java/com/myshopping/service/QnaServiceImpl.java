@@ -48,4 +48,9 @@ public class QnaServiceImpl implements QnaService {
 		return mapper.read(qna_code);
 	}
 
+	@Override
+	public int updateReply(Long qna_code) {
+		return mapper.updateReply(qna_code);
+	}
+
 }

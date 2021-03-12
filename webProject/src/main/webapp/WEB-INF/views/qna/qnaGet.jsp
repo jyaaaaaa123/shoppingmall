@@ -14,7 +14,7 @@
 				<h3>Q&A</h3>
 				<br>
 				<div class="col-lg-12">
-					<div class="panel panel-default">
+					<div id="question" class="panel panel-default">
 						<div class="panel-body">
 								<div class="form-group">
 									<label>제목</label>
@@ -34,6 +34,17 @@
 								<button id="backToListBtn" class="btn btn-primary btn-sm" type="button">뒤로가기</button>
 						</div>
 					</div>
+				</div>
+				<hr>
+				<br>
+				<div class="col-lg-12">
+					<ul class="answer">
+						<li class="left clearfix" data-qna_reply_code="12">
+							<div class="header">
+								<strong class="primary-font">답변이 없습니다</strong>
+							</div>
+						</li>
+					</ul>
 				</div>
 			</div>
 		</main>
@@ -68,8 +79,36 @@
 </div>
 
 
+<script src="/resources/js/reply.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
+	
+
+	var qna_code = '<c:out value="${qna.qna_code}"/>';
+	var replyUL = $(".answer");
+	
+	showList();
+	
+	function showList(){
+		
+		replyService.getByQnaCode(qna_code, function(result){
+			str = ""
+			
+			if(result == null || result.length == 0) {
+				replyUL.html("");
+				return;
+			}
+			
+			str += "<li class='left clearfix' data-qna_reply_code='" + result.qna_reply_code + "'>";
+			str += "	<div class='header'><strong class='primary-font'>"+result.qna_reply_title + "</strong>";
+			str += "		<small class='pull-right text-muted'>" + result.qna_replydate + "</small></div>";
+			str += "		<p>"+result.qna_reply+"</p></li>";
+			
+			replyUL.html(str);
+		});
+	}
+	
+	
 	
 	$("#modifyBtn").on("click", function() {
 		$("#modifyModal").modal("show");
@@ -139,9 +178,6 @@ $(document).ready(function(){
 		
 		self.location = "/qna/center";
 	});
-	
-	
-	
 	
 });
 </script>

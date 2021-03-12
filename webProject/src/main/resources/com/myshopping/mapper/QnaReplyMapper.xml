@@ -6,8 +6,8 @@
 	
 	<insert id="create">
 		insert into tbl_qna_reply
-			(qna_code, qna_reply_code, qna_reply)
-		values (#{qna_code}, seq_qna_reply_code.nextval, #{qna_reply})
+			(qna_code, qna_reply_code, qna_reply_title, qna_reply)
+		values (#{qna_code}, seq_qna_reply_code.nextval, #{qna_reply_title}, #{qna_reply})
 	</insert>
 	
 	<select id="read" resultType="com.myshopping.domain.QnaReplyVO">
@@ -16,6 +16,7 @@
 	
 	<update id="update">
 		update tbl_qna_reply set
+			qna_reply_title = #{qna_reply_title},
 			qna_reply = #{qna_reply},
 			qna_replydate = sysdate
 			where qna_reply_code = #{qna_reply_code}
