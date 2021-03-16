@@ -1,6 +1,9 @@
 package com.myshopping.controller;
 
 
+import javax.servlet.http.HttpSession;
+
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -32,9 +35,14 @@ public class CartController {
 		service.insertCart(cart);
 	}
 	
+	
 	@GetMapping("/cartList")
+	@PreAuthorize("isAuthenticated()")
 	public void getListCart(Model model) {
-		UserDetails member = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		UserDetails member = (UserDetails) principal;
 		model.addAttribute("cartList", service.getListCart(member.getUsername()));
 	}
 	

@@ -31,29 +31,28 @@
 			<div class="row mb-2">
 				<form action="/member/myPageUpdate" method="post">
                   <div class="col-12">
-                  
                     <label for="userId" class="form-label">아이디</label>
-                    <input type="text" name="userid" class="form-control" id="userId" placeholder="ID" value="<sec:authentication property='principal.username' />" readonly="readonly">
+                    <input type="text" name="userid" class="form-control" id="userId" value="<c:out value='${myinfo.userid}'/>" readonly="readonly">
                   </div>
       
 
                   <div class="col-12">
                     <label for="username" class="form-label">이름</label>
                     <div class="input-group has-validation">
-                      <input type="text" name="userName" class="form-control" id="username" placeholder="Username" value="<sec:authentication property='principal.member.userName' />" required>
+                      <input type="text" name="userName" class="form-control" id="username" value="<c:out value='${myinfo.userName}'/>">
                     </div>
                   </div>
       
       
                   <div class="col-12">
                     <label for="address2" class="form-label">전화번호</label>
-                    <input type="text" name="userphone" class="form-control" id="address2" placeholder="Phone Number"  value="<sec:authentication property='principal.member.userphone' />">
+                    <input type="text" name="userphone" class="form-control" id="address2" placeholder="Phone Number"  value="<c:out value='${myinfo.userphone}'/>">
                   </div>
       
                 
                   <div class="col-12">
                     <label for="address2" class="form-label">이메일</label>
-                    <input type="text" name="useremail" class="form-control" id="address2" placeholder="email"  value="<sec:authentication property='principal.member.useremail' />">
+                    <input type="text" name="useremail" class="form-control" id="address2" placeholder="email"  value="<c:out value='${myinfo.useremail}'/>">
                   </div>
                   
                   <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">

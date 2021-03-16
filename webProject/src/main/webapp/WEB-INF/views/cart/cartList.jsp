@@ -1,25 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ include file="../includes/header.jsp"%>
 <div class="container-fluid">
 	<div class="row">
-		<nav id="sidebarMenu"
-			class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-			<div class="position-sticky pt-3">
-				<ul class="nav flex-column">
-					<li class="nav-item"><a class="nav-link" href="/product/list?product_ctgr=키보드"> <span
-							data-feather="file"></span> 키보드
-					</a></li>
-					<li class="nav-item"><a class="nav-link" href="/product/list?product_ctgr=마우스"> <span
-							data-feather="shopping-cart"></span> 마우스
-					</a></li>
-					<li class="nav-item"><a class="nav-link" href="/product/list?product_ctgr=모니터"> <span
-							data-feather="users"></span> 모니터
-					</a></li>
-				</ul>
-			</div>
-		</nav>
 		<main class="col-md-10">
 			<div class="row">
 				<div class="col-4 center-block">
@@ -43,7 +28,7 @@
 								</p>
 								<p>
 									가격
-									<c:out value="${cart.product_price}" />
+									<fmt:formatNumber type="number" maxFractionDigits="3" value="${cart.product_price}" />원
 								</p>
 								<p>
 									수량
@@ -51,14 +36,16 @@
 								</p>
 								<p>
 									총 가격
-									<c:out value="${cart.cart_stock * cart.product_price}" />
+									<fmt:formatNumber type="number" maxFractionDigits="3" value="${cart.cart_stock * cart.product_price}" />원
 								</p>
 								<button type="button" class="btn btn-primary" id="deleteCart${cart.cart_code}">삭제</button>
 							</div>
 							<br>
 							</div>
 						</c:forEach>
-						<button type="button" class="btn btn-primary" id="order">결제하기</button>
+						<c:if test="${!empty cartList}">
+							<button type="button" class="btn btn-primary" id="order">결제하기</button>
+						</c:if>
 					</div>
 				</div>
 			</div>

@@ -1,5 +1,7 @@
 package com.myshopping.controller;
 
+import java.io.File;
+import java.net.URLDecoder;
 import java.util.List;
 
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -14,7 +16,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.myshopping.domain.OrderProductVO;
+import com.myshopping.domain.ProductImageVO;
 import com.myshopping.domain.ProductVO;
+import com.myshopping.service.MemberService;
 import com.myshopping.service.OrderService;
 import com.myshopping.service.ProductService;
 import com.myshopping.service.QnaService;
@@ -32,6 +36,7 @@ public class AdminController {
 	private ProductService productService;
 	private OrderService orderService;
 	private QnaService qnaService;
+	private MemberService memberService;
 	
 	@GetMapping("/adminProduct")
 	public void adminProduct(Model model) {
@@ -64,7 +69,22 @@ public class AdminController {
 	
 	@PostMapping("/adminProductRemove")
 	public String adminProductRemove(Long product_code) {
+		ProductVO product = productService.get(product_code);
+		
+		List<ProductImageVO> imageList = product.getImageList();
+		for(ProductImageVO image : imageList) {
+			String path = image.getUploadPath() + "\\" + image.getFileName();
+			try {
+				File file = new File(URLDecoder.decode("C:/Users/jy/git/shoppingmall/webProject/src/main/webapp" + path, "UTF-8"));
+				file.delete();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
 		productService.remove(product_code);
+		
+		
 		return "redirect:/admin/adminProduct";
 	}
 	
@@ -109,7 +129,13 @@ public class AdminController {
 	}
 	
 	@GetMapping("/adminMember")
-	public void adminMember() {
-		
+	public void adminMember(Model model) {
+		model.addAttribute("memberList", memberService.memberList());
+	}
+	
+	@PostMapping("/adminMemberDrop")
+	@ResponseBody
+	public void adminMemberDrop(@RequestParam("userid") String userid) {
+		memberService.remove(userid);
 	}
 }

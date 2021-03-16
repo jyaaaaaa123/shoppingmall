@@ -35,8 +35,10 @@ public class MemberController {
 	
 	@GetMapping("/myPage")
 	@PreAuthorize("isAuthenticated()")
-	public void myPage() {
-		
+	public void myPage(Model model) {
+		UserDetails member = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String userid = member.getUsername();
+		model.addAttribute("myinfo", memberService.readUser(userid));
 	}
 	
 	@GetMapping("/register")
@@ -55,11 +57,22 @@ public class MemberController {
 		return "redirect:/member/login";
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="/checkid", produces = "application/text; charset=utf8")
+	public String checkId(@RequestParam("checkid") String userid) {
+		MemberVO member = memberService.checkId(userid);
+		if(member == null) {
+			return "불일치";
+		} else {
+			return "일치";
+		}
+	}
+	
+	
 	@PostMapping("myPageUpdate")
 	@PreAuthorize("isAuthenticated()")
 	public String updateUser(MemberVO member) {
 		memberService.update(member);
-		
 		return "redirect:/member/myPage";
 	}
 	

@@ -50,7 +50,6 @@
 			      		<label>상품 설명</label>
 			      		<div class="form-floating">
 						  <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea" name="product_explain"></textarea>
-						  <label for="floatingTextarea">상품 설명</label>
 					</div>
 			      	</div>
 			      	<div class="form-group">

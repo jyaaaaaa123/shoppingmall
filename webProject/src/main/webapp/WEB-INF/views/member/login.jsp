@@ -58,9 +58,8 @@
 <body class="text-center">
     <main class="form-signin">
         <form action="/login" method="post">
-        	<p class="h5 my-0 fw-normal"><a style="color: black; text-decoration:none; " href="/">Company name</a></p>
-          <img class="mb-4" src="/docs/5.0/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
-          
+          <img class="mb-2" src="/resources/image/logo.png" alt="" width="72" height="57">
+          <p class="h5 fw-normal mb-4"><a style="color: black; text-decoration:none; " href="/">너굴컴</a></p>
           <label for="inputId" class="visually-hidden">ID</label>
           <input type="text" id="inputId" name="username" class="form-control" placeholder="Id" required autofocus>
           <label for="inputPassword" class="visually-hidden">Password</label>

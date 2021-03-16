@@ -7,36 +7,14 @@
 <%@ include file="../includes/header.jsp"%>
 <div class="container-fluid">
 	<div class="row">
-		<nav id="sidebarMenu"
-			class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-			<div class="position-sticky pt-3">
-				<ul class="nav flex-column">
-					<li class="nav-item"><a class="nav-link" href="/product/list?product_ctgr=키보드"> <span
-							data-feather="file"></span> 키보드
-					</a></li>
-					<li class="nav-item"><a class="nav-link" href="/product/list?product_ctgr=마우스"> <span
-							data-feather="shopping-cart"></span> 마우스
-					</a></li>
-					<li class="nav-item"><a class="nav-link" href="/product/list?product_ctgr=모니터"> <span
-							data-feather="users"></span> 모니터
-					</a></li>
-				</ul>
-			</div>
-		</nav>
-
 		<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+			<p><a style="color: black; text-decoration:none; " href="/">🏠 </a> > <c:out value="${product[0].product_ctgr}"/></p>
 			<h2>인기상품</h2>
-			<div class="row">
-				<c:forEach var="best" items="${best}">
-				<div class="col-lg-2">
-					<svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img"
-						aria-label="Placeholder: 140x140"
-						preserveAspectRatio="xMidYMid slice" focusable="false">
-						<title>Placeholder</title><rect width="100%" height="100%"
-							fill="#777" />
-						<text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
-					<h2><c:out value="${best.product_name}" /></h2>
-					<p><c:out value="${best.product_explain}" /></p>
+			<div class="row mb-2">
+				<c:forEach var="best" items="${best}" varStatus="status">
+				<div class="col-sm-2 border">
+					<img src="<c:out value="${best.imageList[0].uploadPath}"/>/<c:out value="${best.imageList[0].fileName}"/>" alt="..." class="img-thumbnail">
+					<h5 style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><c:out value="${best.product_name}" /></h5>
 					<p>
 						<a class="btn btn-secondary" href="/product/selectProduct?product_code=${best.product_code}">자세히보기 &raquo;</a>
 					</p>
@@ -89,37 +67,32 @@
 				</ul>
 			</div>
 			<!-- item -->
-			<div class="row mb-2">
+			<div class="row mb-3">
 				<c:forEach items="${product}" var="product">
-				<div class="col-md-10">
-					<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-						<div class="col-auto d-none d-lg-block">
-							<img src="<c:out value="${product.imageList[0].uploadPath}"/>/<c:out value="${product.imageList[0].fileName}"/>">
-						</div>
-						<div class="col-md-auto p-3 d-flex flex-fill flex-column position-static">
-							<strong class="d-inline-block mb-2 text-primary"><c:out value="${product.product_ctgr}" /></strong>
+				<div class="col-md-12">
+					<div class="row g-0 border rounded overflow-hidden flex-md-row">
+						<div class="col-2">
+							<img class="img-thumbnail" alt="..." width="300" height="200" src="<c:out value="${product.imageList[0].uploadPath}"/>/<c:out value="${product.imageList[0].fileName}"/>">
+						</div> 
+						<div class="col-7 my-2 px-1 position-relative">
 							<c:set var="nowCtgr" value="${product.product_ctgr}"/>
-							<h3 class="mb-0"><c:out value="${product.product_name}" /></h3>
-							<div class="mb-1 text-muted"><c:out value="${product.product_price}" /></div>
-							<p class="card-text mb-auto"><c:out value="${product.product_explain}" /></p>
-							<a id="moveSelect" href="<c:out value='${product.product_code}'/>" class="stretched-link">상세정보 확인</a>
+							<h5 class="mb-0"><c:out value="${product.product_name}" /></h5>
+							<p class="card-text my-3"><c:out value="${product.product_explain}" /></p>
+							<a id="moveSelect${product.product_code}" href="<c:out value='${product.product_code}'/>" class="stretched-link">상세정보 확인</a>
 						</div>
-						<div class="col d-flex align-items-end flex-column">
-							<p>
-								<a class="btn btn-secondary" href="#">장바구니</a>
-							</p>
-							<p>
-								<a class="btn btn-secondary" href="#">구매하기</a>
-							</p>
-							<p>
-								<a class="btn btn-secondary" href="#">찜</a>
-							</p>
+						<div class="col-3">
+							<div class="h3 font-weight-bold my-3"><fmt:formatNumber type="number" maxFractionDigits="3" value="${product.product_price}" />원</div>
+							<div class="my-5">
+								<a id="cart${product.product_code}" class="btn btn-outline-warning my-3">장바구니</a>
+								<a id="order${product.product_code}" class="btn btn-outline-dark">구매하기</a>
+							</div>
+							<input type="hidden" value="${product.product_stock}"/>
 						</div>
 					</div>
 				</div>
 				</c:forEach>
 				<!-- pagination -->
-				<nav>
+				<nav class="d-flex justify-content-center">
 				  <ul class="pagination">
 				  	<c:if test="${pageMaker.prev}">
 				    <li class="paginate_button previous">
@@ -160,13 +133,13 @@ $(document).ready(function(){
 		pageForm.submit();
 	});
 	
-	$("#moveSelect").on("click", function(e){
+	$("[id^='moveSelect']").on("click", function(e){
 		e.preventDefault();
-		
+
 		pageForm.find("input[name='product_ctgr']").remove();
 		pageForm.append("<input type='hidden' name='product_code' value='" + $(this).attr("href") + "'>");
 		pageForm.attr("action", "/product/selectProduct");
-		pageForm.submit();0
+		pageForm.submit();
 	});
 	
 	
@@ -184,6 +157,61 @@ $(document).ready(function(){
         return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
     }
 	
+	$("[id^='cart']").on("click", function(e){
+		var product_code = $(this).attr("id").substring(4);
+		var user = '<sec:authentication property="principal" />';
+		
+		
+		if(user === 'anonymousUser') {
+			alert("로그인이 필요합니다");
+			return;
+		} else {
+			var con = confirm("장바구니에 넣으시겠습니까?");
+			if(con) {
+	    		var stock = $(this).closest("div").find('input').val();
+	    		
+	    		var cart_stock = 1;
+	    		
+	    		if (cart_stock > stock) {
+	    			alert("현재 재고가 부족합니다");
+	    			return;
+	    		};
+	    		
+	    		var data = {
+	    				product_code : product_code,
+	    				cart_stock : cart_stock
+	    		};		
+	    		
+	    		var token = $("meta[name='_csrf']").attr("content");
+	        	var header = $("meta[name='_csrf_header']").attr("content");
+	        	$.ajaxPrefilter(function(options, originalOptions, jqXHR) {
+	        		if (options['type'].toLowerCase() === 'post') {
+	        			jqXHR.setRequestHeader(header, token)
+	        		}
+	        	});
+	        		
+	    		$.ajax({
+	    			url : "/cart/add",
+	    			type : "post",
+	    			data: data,
+	    			success : function () {
+	    				alert("카트 담기 완료");
+	    			},
+	    			error : function() {
+	    				alert("카트 담기 실패");
+	    			}
+	    		});
+			}else {
+				return;
+			}
+		}
+	});
+	
+	
+	$("[id^='order']").on("click", function(e){
+		var product_code = $(this).attr("id").substring(5);
+		alert(product_code);
+	});
 });
 </script>
 

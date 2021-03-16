@@ -3,33 +3,18 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ include file="../includes/header.jsp"%>
-<div class="container-fluid">
-    <div class="row">
-        <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-          <div class="position-sticky pt-3">
-            <ul class="nav flex-column">
-					<li class="nav-item"><a class="nav-link" href="/product/list?product_ctgr=키보드"> <span
-							data-feather="keyboard">키보드</span>
-					</a></li>
-					<li class="nav-item"><a class="nav-link" href="/product/list?product_ctgr=마우스"> <span
-							data-feather="mouse">마우스</span>
-					</a></li>
-					<li class="nav-item"><a class="nav-link" href="/product/list?product_ctgr=모니터"> <span
-							data-feather="moniter">모니터</span> 
-					</a></li>
-				</ul>
-          </div>
-        </nav>
+
+    <div class="row d-flex justify-content-center">
     <main class="col-md-10">
         <div class="row">
         <div class="col-4 center-block">
-            <img src="img/imageSample.jpg" class="img-thumbnail " alt="">
+            <img class="img-thumbnail" alt="..." src="<c:out value="${selectedProduct.imageList[0].uploadPath}"/>/<c:out value="${selectedProduct.imageList[0].fileName}"/>">
         </div>
-        <div class="col-4">
+        <div class="col-4 justify-content-end" >
             <div class="row">
                 <strong class="d-inline-block mb-2 text-primary"><c:out value="${selectedProduct.product_ctgr}"/></strong>
                     <h3 class="mb-0"><c:out value="${selectedProduct.product_name}"/></h3>
-                    <div class="mb-1 text-muted"><c:out value="${selectedProduct.product_price}"/></div>
+                    <div class="mb-1 text-muted"><fmt:formatNumber type="number" maxFractionDigits="3" value="${selectedProduct.product_price}" />원</div>
                     <p class="card-text mb-auto"><c:out value="${selectedProduct.product_explain}"/></p>
                    	
             </div>
@@ -113,5 +98,4 @@
 	    </div>
     	</main>
 	</div>
-</div>
 <%@ include file="../includes/footer.jsp"%>

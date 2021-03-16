@@ -22,6 +22,17 @@
 		<result property="auth" column="auth"/>
 	</resultMap>
 	
+	<select id="memberList" resultMap="memberMap">
+		SELECT 
+			mem.userid, userpw, username, userphone, useremail, enabled, regdate, updatedate, auth
+		FROM
+			tbl_member mem 
+			LEFT OUTER JOIN tbl_member_auth auth 
+				on mem.userid = auth.userid
+		WHERE auth.auth = 'ROLE_USER'
+	</select>
+	
+	
 	<select id="readUser" resultMap="memberMap">
 		SELECT
 			mem.userid, userpw, username, userphone, useremail, enabled, regdate, updatedate, auth
@@ -43,4 +54,8 @@
 	<delete id="remove">
 		delete from tbl_member where userid = #{userid}
 	</delete>
+	
+	<select id="checkId" resultType="com.myshopping.domain.MemberVO">
+		select userid from tbl_member where userid = #{userid} 	
+	</select>
 </mapper>

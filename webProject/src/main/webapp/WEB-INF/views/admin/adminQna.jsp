@@ -73,8 +73,6 @@
 						</table>
 					</div>
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-					<button class="btn btn-primary btn-sm" type="submit">등록</button>
-					<button class="btn btn-primary btn-sm" type="reset">취소</button>
 				</div>
 			</div>
 		</main>

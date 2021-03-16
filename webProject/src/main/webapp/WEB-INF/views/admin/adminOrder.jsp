@@ -40,7 +40,7 @@
 		              <small class="text-muted">주문자 아이디 : <c:out value="${order.userid}"/></small><br>
 		              <small class="text-muted">수령인 이름 : <c:out value="${order.order_name}"/></small><br>
 		              <small class="text-muted">전화번호 : <c:out value="${order.order_phone}"/></small><br>
-		              <small class="text-muted">가격 : <c:out value="${order.order_allprice}"/>원</small><br>
+		              <small class="text-muted">가격 : <fmt:formatNumber type="number" maxFractionDigits="3" value="${order.order_allprice}" />원</small><br>
 		            <small class="text-muted">주소 : <c:out value="${order.order_address}"/></small>
 		            </div>
 		            <c:choose>

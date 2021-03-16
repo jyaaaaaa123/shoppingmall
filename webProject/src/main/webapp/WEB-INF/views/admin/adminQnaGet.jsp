@@ -37,6 +37,17 @@
 						</div>
 					</div>
 				</div>
+				<hr>
+				<br>
+				<div class="col-lg-12">
+					<ul class="answer">
+						<li class="left clearfix" data-qna_reply_code="12">
+							<div class="header">
+								<strong class="primary-font">답변이 없습니다</strong>
+							</div>
+						</li>
+					</ul>
+				</div>
 			</div>
 		</main>
 	</div>
@@ -75,6 +86,28 @@ $(document).ready(function(){
 	
 	var qna_code = <c:out value="${qna.qna_code}"/>;
 	var answerModal = $("#answerModal");
+	var replyUL = $(".answer");
+	
+	showList();
+	
+	function showList(){
+		
+		replyService.getByQnaCode(qna_code, function(result){
+			str = ""
+			
+			if(result == null || result.length == 0) {
+				replyUL.html("");
+				return;
+			}
+			
+			str += "<li class='left clearfix' data-qna_reply_code='" + result.qna_reply_code + "'>";
+			str += "	<div class='header'><strong class='primary-font'>"+result.qna_reply_title + "</strong>";
+			str += "		<small class='pull-right text-muted'>" + result.qna_replydate + "</small></div>";
+			str += "		<p>"+result.qna_reply+"</p></li>";
+			
+			replyUL.html(str);
+		});
+	}
 	
 	var token = $("meta[name='_csrf']").attr("content");
 	var header = $("meta[name='_csrf_header']").attr("content");

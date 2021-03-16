@@ -6,7 +6,6 @@
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
 <%@ include file="../includes/header.jsp" %>
-	<h1>my Page</h1>
 <div class="container-fluid">
 	<div class="row">
 		<nav id="sidebarMenu"
@@ -27,7 +26,6 @@
 		</nav>
 
 		<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-			
 			<div class="row mb-2">
 				<form action="/member/withdraw" method="post">
                   
