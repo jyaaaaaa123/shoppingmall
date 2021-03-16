@@ -23,6 +23,7 @@
             	수량 : &nbsp; <input type="text" id="stock" class="input-group mb-3" style="width: 60px;" value="1">
                 <p>
                     <button type="button" id="btn_cart" class="btn btn-secondary">장바구니</button>
+                    <a type="button" id="btn_order" class="btn btn-outline-dark">구매하기</a>
                     <script type="text/javascript">
                    
                     
@@ -54,17 +55,55 @@
                     			type : "post",
                     			data: data,
                     			success : function () {
-                    				alert("카트 담기 완료");
+                    				alert("장바구니 담기 완료");
                     				$("#stock").val("1");
                     			},
                     			error : function() {
-                    				alert("카트 담기 실패");
+                    				alert("장바구니 담기 실패");
                     			}
                     			
                     		});
                     	});
+                    
+                    $("#btn_order").click(function () {
+                		var product_code = ${selectedProduct.product_code};
+                		var stock = ${selectedProduct.product_stock};
+                		var cart_stock = $("#stock").val();
+                		
+                		if (cart_stock > stock) {
+                			alert("현재 재고가 부족합니다");
+                			return;
+                		};
+                		
+                		var data = {
+                				product_code : product_code,
+                				cart_stock : cart_stock
+                		};		
+                		
+                		var token = $("meta[name='_csrf']").attr("content");
+                    	var header = $("meta[name='_csrf_header']").attr("content");
+                    	$.ajaxPrefilter(function(options, originalOptions, jqXHR) {
+                    		if (options['type'].toLowerCase() === 'post') {
+                    			jqXHR.setRequestHeader(header, token)
+                    		}
+                    	});
+                    		
+                		$.ajax({
+                			url : "/cart/add",
+                			type : "post",
+                			data: data,
+                			success : function () {
+                				$("#stock").val("1");
+                				location.href = "/order/orderCheck";
+                			},
+                			error : function() {
+                				alert("구매 실패");
+                			}
+                			
+                		});
+                	});
                     </script>
-                    <a class="btn btn-secondary" href="#">구매하기</a>
+                    
                 </p>
             </div>
         </div>

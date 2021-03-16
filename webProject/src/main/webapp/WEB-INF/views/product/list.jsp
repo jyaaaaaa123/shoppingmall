@@ -210,7 +210,51 @@ $(document).ready(function(){
 	
 	$("[id^='order']").on("click", function(e){
 		var product_code = $(this).attr("id").substring(5);
-		alert(product_code);
+		var user = '<sec:authentication property="principal" />';
+		
+		if(user === 'anonymousUser') {
+			alert("로그인이 필요합니다");
+			return;
+		} else {
+			var con = confirm("구매하시겠습니까?");
+			if(con) {
+	    		var stock = $(this).closest("div").find('input').val();
+	    		
+	    		var cart_stock = 1;
+	    		
+	    		if (cart_stock > stock) {
+	    			alert("현재 재고가 부족합니다");
+	    			return;
+	    		};
+	    		
+	    		var data = {
+	    				product_code : product_code,
+	    				cart_stock : cart_stock
+	    		};		
+	    		
+	    		var token = $("meta[name='_csrf']").attr("content");
+	        	var header = $("meta[name='_csrf_header']").attr("content");
+	        	$.ajaxPrefilter(function(options, originalOptions, jqXHR) {
+	        		if (options['type'].toLowerCase() === 'post') {
+	        			jqXHR.setRequestHeader(header, token)
+	        		}
+	        	});
+	        		
+	    		$.ajax({
+	    			url : "/cart/add",
+	    			type : "post",
+	    			data: data,
+	    			success : function () {
+	    				location.href = "/order/orderCheck";
+	    			},
+	    			error : function() {
+	    				
+	    			}
+	    		});
+			}else {
+				return;
+			}
+		}
 	});
 });
 </script>

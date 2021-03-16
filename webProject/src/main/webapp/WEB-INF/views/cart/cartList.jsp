@@ -7,9 +7,6 @@
 	<div class="row">
 		<main class="col-md-10">
 			<div class="row">
-				<div class="col-4 center-block">
-					<img src="img/imageSample.jpg" class="img-thumbnail " alt="">
-				</div>
 				<div class="col-4">
 					<div class="row">
 						<h3>장바구니</h3>
