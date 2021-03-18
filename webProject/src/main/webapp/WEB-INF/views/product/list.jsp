@@ -10,14 +10,11 @@
 		<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 			<p><a style="color: black; text-decoration:none; " href="/">🏠 </a> > <c:out value="${product[0].product_ctgr}"/></p>
 			<h2>인기상품</h2>
-			<div class="row mb-2">
+			<div class="row mb-5">
 				<c:forEach var="best" items="${best}" varStatus="status">
-				<div class="col-lg-2 border">
+				<div class="col-lg-2 border mx-3" style="cursor: pointer;" onclick="location.href='/product/selectProduct?product_code=${best.product_code}'">
 					<img src="<c:out value="${best.imageList[0].uploadPath}"/>/<c:out value="${best.imageList[0].fileName}"/>" alt="..." class="img-thumbnail">
 					<h5 style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><c:out value="${best.product_name}" /></h5>
-					<p>
-						<a class="btn btn-secondary" href="/product/selectProduct?product_code=${best.product_code}">자세히보기 &raquo;</a>
-					</p>
 				</div>
 				</c:forEach>
 			</div>
@@ -69,7 +66,7 @@
 			<!-- item -->
 			<div class="row mb-3">
 				<c:forEach items="${product}" var="product">
-				<div class="col-md-12">
+				<div class="col-md-12 mb-1">
 					<div class="row g-0 border rounded overflow-hidden flex-md-row">
 						<div class="col-2">
 							<img class="img-thumbnail" alt="..." width="300" height="200" src="<c:out value="${product.imageList[0].uploadPath}"/>/<c:out value="${product.imageList[0].fileName}"/>">
@@ -92,7 +89,7 @@
 				</div>
 				</c:forEach>
 				<!-- pagination -->
-				<nav class="d-flex justify-content-center">
+				<nav class="d-flex justify-content-center mt-2">
 				  <ul class="pagination">
 				  	<c:if test="${pageMaker.prev}">
 				    <li class="paginate_button previous">

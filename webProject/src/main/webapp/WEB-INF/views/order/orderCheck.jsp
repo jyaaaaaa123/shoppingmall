@@ -75,6 +75,7 @@ $(document).ready(function(){
   		e.preventDefault();
   		var con = confirm("이대로 결제하시겠습니까?");
   		if(con){
+  			alert("주문 완료");
   			formObj.submit();
   		} else {
   			alert("주문 실패");

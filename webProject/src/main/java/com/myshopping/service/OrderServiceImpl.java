@@ -114,6 +114,11 @@ public class OrderServiceImpl implements OrderService {
 		return orderMapper.getOrderProductList(order_code);
 	}
 
+	@Override
+	public OrderVO getOrder(String order_code) {
+		return orderMapper.getOrder(order_code);
+	}
+
 	
 
 	

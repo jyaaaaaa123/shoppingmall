@@ -104,13 +104,12 @@
             <section id=bestP" class="bestP">
 	            <div class="row d-flex justify-content-center">
 	            	<div class="section-title">
-		          		<h2 class="h">인기상품</h2>
+		          		<h2 class="mb-3">인기상품</h2>
 		        	</div>
 	            	<c:forEach var="best" items="${allBest}">
-	                <div class="col-lg-2">
-	                    <img src="<c:out value="${best.imageList[0].uploadPath}"/>/<c:out value="${best.imageList[0].fileName}"/>" alt="..." class="img-thumbnail">
-	                    <h4><c:out value="${best.product_name}"/></h4>
-	                    <p><a class="btn btn-secondary text-nowrap" href="/product/selectProduct?product_code=${best.product_code}">자세히보기 &raquo;</a></p>
+	                <div class="col-lg-2 mx-1" style="cursor: pointer;" onclick="location.href='/product/selectProduct?product_code=${best.product_code}'">
+	                	<img src="<c:out value="${best.imageList[0].uploadPath}"/>/<c:out value="${best.imageList[0].fileName}"/>" alt="..." class="img-thumbnail">
+	                    <h5 class="my-3"><c:out value="${best.product_name}"/></h5>
 	                </div><!-- /.col-lg-4 -->
 	                </c:forEach>
 	            </div><!-- /.row -->

@@ -19,6 +19,8 @@ public interface OrderMapper {
 	
 	public List<OrderVO> getOrderList(String userid);
 	
+	public OrderVO getOrder(String order_code);
+	
 	public List<OrderProductVO> getOrderProductList(String order_code);
 	
 	public List<OrderProductListVO> getOrderSelectList(String order_code);

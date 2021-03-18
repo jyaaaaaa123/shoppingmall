@@ -25,6 +25,8 @@ public interface OrderService {
 	
 	public void insertOrderProduct(OrderProductVO orderProduct);
 	
+	public OrderVO getOrder(String order_code);
+	
 	public List<OrderProductListVO> getAllOrderList();
 	
 	public List<OrderVO> getOrderList(String userid);

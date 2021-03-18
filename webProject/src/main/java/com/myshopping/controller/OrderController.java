@@ -46,7 +46,7 @@ public class OrderController {
 	
 	@Transactional
 	@PostMapping("/order")
-	public String order(OrderVO order, OrderProductVO orderProduct) {
+	public void order(OrderVO order, OrderProductVO orderProduct, Model model) {
 		UserDetails member = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String userid = member.getUsername();
 		String order_code = UUID.randomUUID().toString();
@@ -56,13 +56,14 @@ public class OrderController {
 		
 		orderService.insertOrder(order);
 		
+		model.addAttribute("order", orderService.getOrder(order_code));
+		
 		orderProduct.setUserid(userid);
 		orderProduct.setOrder_code(order_code);
 		
 		orderService.insertOrderProduct(orderProduct);
 		
 		orderService.deleteAllCart(userid);
-		return "redirect:/";
 	}
 	
 	@ResponseBody

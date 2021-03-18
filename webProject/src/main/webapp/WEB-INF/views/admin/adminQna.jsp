@@ -15,9 +15,9 @@
 
 <div class="container-fluid">
 	<div class="row">
-		<nav id="sidebarMenu" class="col-md-2 bg-light sidebar">
+		<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
             <div class="position-sticky pt-3">
-              <ul class="nav">
+              <ul class="nav flex-column">
                 	<li class="nav-item"><a class="nav-link" href="/admin/adminProduct"> <span
 							data-feather="file"></span> 상품관리
 					</a></li>
@@ -35,7 +35,7 @@
           </nav>
 		
 		
-		<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+		<main class="col-md-10 ms-sm-auto col-lg-10 px-md-4">
 
 			<div class="row mb-2">
 				<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">

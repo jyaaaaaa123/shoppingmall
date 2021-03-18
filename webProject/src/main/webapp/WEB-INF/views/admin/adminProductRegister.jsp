@@ -48,9 +48,7 @@
 			      	</div>
 			      	<div class="form-group">
 			      		<label>상품 설명</label>
-			      		<div class="form-floating">
-						  <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea" name="product_explain"></textarea>
-					</div>
+						<textarea class="form-control" id="floatingTextarea" name="product_explain"></textarea>
 			      	</div>
 			      	<div class="form-group">
 			      		<label>상품 가격</label>

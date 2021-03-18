@@ -25,6 +25,10 @@
 		select * from tbl_order where userid = #{userid}
 	</select>
 	
+	<select id="getOrder" resultType="com.myshopping.domain.OrderVO">
+		select * from tbl_order where order_code = #{order_code}
+	</select>
+	
 	<select id="getOrderSelectList" resultType="com.myshopping.domain.OrderProductListVO">
 		select  o.order_code, o.userid, o.order_name, o.order_phone, o.order_address, o.order_allprice, o.order_day, o.order_complete, op.order_product_code, op.product_code, op.order_product_stock, op.order_product_comment, p.product_name, p.product_price
 			from tbl_order o
