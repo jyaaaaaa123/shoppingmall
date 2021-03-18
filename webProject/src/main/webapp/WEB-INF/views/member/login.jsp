@@ -53,13 +53,19 @@
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     }
+    
+    #logo {
+    		text-decoration: none;
+    		font-size: 60px;
+    		color: black;
+    		font-family: "OpenFantasy", Fantasy;
+    	}
     </style>
 </head>
 <body class="text-center">
     <main class="form-signin">
         <form action="/login" method="post">
-          <img class="mb-2" src="/resources/image/logo.png" alt="" width="72" height="57">
-          <p class="h5 fw-normal mb-4"><a style="color: black; text-decoration:none; " href="/">너굴컴</a></p>
+          <p class="h5 mb-3 fw-normal"><a id="logo" href="/">COMPUTER</a></p>
           <label for="inputId" class="visually-hidden">ID</label>
           <input type="text" id="inputId" name="username" class="form-control" placeholder="Id" required autofocus>
           <label for="inputPassword" class="visually-hidden">Password</label>

@@ -132,7 +132,24 @@
                       <td><c:out value="${comment.userid}"/></td>
                       <td><c:out value="${comment.comment_content}"/></td>
                       <td><fmt:formatDate value="${comment.comment_regdate}"/></td>
-                      <td><c:out value="${comment.comment_star}"/></td>
+                      <td>
+                      	<c:choose>
+                      		<c:when test="${comment.comment_star == 5}">
+                      			★★★★★
+                      		</c:when>
+                      		<c:when test="${comment.comment_star == 4}">
+                      			★★★★☆
+                      		</c:when>
+                      		<c:when test="${comment.comment_star == 3}">
+                      			★★★☆☆
+                      		</c:when>
+                      		<c:when test="${comment.comment_star == 2}">
+                      			★★☆☆☆
+                      		</c:when>
+                      		<c:when test="${comment.comment_star == 1}">
+                      			★☆☆☆☆
+                      		</c:when>
+                      	</c:choose>
                     </tr>
                   </tbody>
                   </c:forEach>

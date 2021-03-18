@@ -10,9 +10,23 @@
     <!-- Bootstrap core CSS -->
     <link href="/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <style>
+    	body {
+		    display: flex;
+		    align-items: center;
+		    padding-top: 40px;
+		    padding-bottom: 40px;
+		    background-color: #f5f5f5;
+		}
         .container {
-        max-width: 500px;
+        	max-width: 500px;
         }
+        
+        #logo {
+    		text-decoration: none;
+    		font-size: 60px;
+    		color: black;
+    		font-family: "OpenFantasy", Fantasy;
+    	}
     </style>
     <sec:csrfMetaTags/>
 </head>
@@ -20,7 +34,7 @@
     <div class="container">
         <main>
           <div class="py-5 text-center">
-            <img class="d-block mx-auto mb-4" src="/resources/image/logo.png" alt="" width="72" height="57">
+           <p class="h5 my-0 fw-normal"><a id="logo" href="/">COMPUTER</a></p>
           </div>
       
           <div class="row">

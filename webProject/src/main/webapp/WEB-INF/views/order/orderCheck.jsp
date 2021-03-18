@@ -88,14 +88,20 @@ $(document).ready(function(){
 			var con = confirm("내 정보를 가져오시겠습니까?");
 			
 			if(con) {
-				$.getJSON("/order/myInfo" + ".json",
-					function(data) {
+				$.ajax({
+					url: "/order/myInfo",
+					dataType: "json",
+					type: "get",
+					success: function(data) {
 						$("#name").val(data.userName);
 				  		$("#phone").val(data.userphone);
-						}).fail(function(xhr, status, err) {
+					},
+					error: function() {
 						alert("실패");
-						});
+					}	
+				});
 			} else {
+				$("#myInfo").prop("checked", false);
 				return;
 			}
 		} else {

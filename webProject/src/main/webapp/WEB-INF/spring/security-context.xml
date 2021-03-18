@@ -7,7 +7,6 @@
 <import resource="root-context.xml" />	
 	
 	<bean id="customAccessDenied" class="com.myshopping.security.CustomAccessDeniedHandler"></bean>
-	<!--  <bean id="customLoginSuccess" class="com.myshopping.security.CustomLoginSuccessHandler"></bean> -->
 	<bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></bean>
 	<bean id="customUserDetailsService" class="com.myshopping.security.CustomUserDetailsService"></bean>
 	 
