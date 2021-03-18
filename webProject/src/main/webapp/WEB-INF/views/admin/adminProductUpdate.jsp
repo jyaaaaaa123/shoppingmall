@@ -29,10 +29,9 @@
           </nav>
 		
 		
-		<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-
-			<div class="row mb-2">
-			      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+		<main class="col-md-9 ms-sm-auto col-lg-9">
+			<div class="row mb-2 d-flex">
+			      <div class="col-6">
 			      
 			      <form role="form" action="/admin/adminProductUpdate" method="post">
 			      	<div class="form-group">
@@ -50,10 +49,8 @@
 			      	</div>
 			      	<div class="form-group">
 			      		<label>상품 설명</label>
-			      		<div class="form-floating">
-						  <textarea class="form-control" id="floatingTextarea" name="product_explain"><c:out value='${get.product_explain}'/></textarea>
+						<textarea class="form-control" id="floatingTextarea" name="product_explain"><c:out value='${get.product_explain}'/></textarea>
 					</div>
-			      	</div>
 			      	<div class="form-group">
 			      		<label>상품 가격</label>
 			      		<input class="form-control" type="text" name="product_price" value="<c:out value='${get.product_price}'/>">
@@ -63,6 +60,7 @@
 			      		<input class="form-control" type="text" name="product_stock" value="<c:out value='${get.product_stock}'/>">
 			      	</div>
 			      	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+			      	<input type="hidden" name="product_code" value="${get.product_code}">
 			      	<button type="submit" class="btn btn-primary">수정</button>
 			      	<button type="reset" class="btn btn-danger">취소</button>
 			      	</form>
@@ -72,5 +70,17 @@
 	</div>
 </div>
 
+<script>
+
+$(document).ready(function(){
+  $(".form-select option").each(function(){
+    if($(this).val()=="${get.product_ctgr}"){
+      $(this).attr("selected","selected");
+    }
+  });
+
+});
+
+</script>
 
 <%@ include file="../includes/footer.jsp"%>

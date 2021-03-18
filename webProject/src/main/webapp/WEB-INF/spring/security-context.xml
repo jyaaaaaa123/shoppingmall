@@ -4,13 +4,13 @@
 	xmlns:security="http://www.springframework.org/schema/security"
 	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-	
+<import resource="root-context.xml" />	
 	
 	<bean id="customAccessDenied" class="com.myshopping.security.CustomAccessDeniedHandler"></bean>
 	<!--  <bean id="customLoginSuccess" class="com.myshopping.security.CustomLoginSuccessHandler"></bean> -->
 	<bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></bean>
 	<bean id="customUserDetailsService" class="com.myshopping.security.CustomUserDetailsService"></bean>
-	
+	 
 	<security:http>
 		
 		<security:intercept-url pattern="/member/myPage" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
@@ -21,7 +21,9 @@
 		
 		<security:form-login login-page="/member/login"/>
 		
-		<security:logout logout-url="/member/logout" logout-success-url="/" invalidate-session="true"/>
+		<security:logout logout-url="/member/logout" logout-success-url="/" invalidate-session="true" delete-cookies="remember-me,JSESSION_ID"/>
+		 	
+		<security:remember-me data-source-ref="dataSource" token-validity-seconds="604800" />
 		
 	</security:http>
 	

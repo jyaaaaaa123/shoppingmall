@@ -161,8 +161,7 @@
 		PRODUCT_NAME = #{product_name},
 		PRODUCT_PRICE = #{product_price},
 		PRODUCT_EXPLAIN = #{product_explain},
-		PRODUCT_STOCK = #{product_stock},
-		PRODUCT_SALES = #{product_sales}
+		PRODUCT_STOCK = #{product_stock}
 		where product_code = #{product_code}
 	</update>
 	

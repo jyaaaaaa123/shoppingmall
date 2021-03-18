@@ -5,6 +5,12 @@
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
 
 <%@ include file="../includes/header.jsp"%>
+<style>
+	#content {
+		max-width: 765px;
+	}
+</style>
+
 <div class="container-fluid">
 	<div class="row">
 
@@ -13,7 +19,7 @@
 			<div class="row mb-2">
 				<h3>Q&A</h3>
 				<br>
-				<div class="col-lg-12">
+				<div id="content" class="col-lg-12">
 					<div id="question" class="panel panel-default">
 						<div class="panel-body">
 								<div class="form-group">
@@ -28,16 +34,20 @@
 									<label>작성자</label>
 									<input type="text" class="form-control" name="userid" value="<c:out value='${qna.userid}'/>" readonly="readonly">
 								</div>
-								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-								<button id="modifyBtn" class="btn btn-primary btn-sm" type="button">수정</button>
-								<button id="removeBtn" class="btn btn-danger btn-sm" type="button">삭제</button>
-								<button id="backToListBtn" class="btn btn-primary btn-sm" type="button">뒤로가기</button>
+								<br/>
+								<div class="form-group offset-sm-3">
+									<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+									<button id="modifyBtn" class="btn btn-primary btn-sm" type="button">수정</button>
+									<button id="removeBtn" class="btn btn-danger btn-sm" type="button">삭제</button>
+									<button id="backToListBtn" class="btn btn-primary btn-sm" type="button">뒤로가기</button>
+								</div>
+								
 						</div>
 					</div>
 				</div>
-				<hr>
 				<br>
 				<div class="col-lg-12">
+				<h5>답변</h5>
 					<ul class="answer">
 						<li class="left clearfix" data-qna_reply_code="12">
 							<div class="header">

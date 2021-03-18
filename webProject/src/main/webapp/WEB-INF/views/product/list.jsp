@@ -12,7 +12,7 @@
 			<h2>인기상품</h2>
 			<div class="row mb-2">
 				<c:forEach var="best" items="${best}" varStatus="status">
-				<div class="col-sm-2 border">
+				<div class="col-lg-2 border">
 					<img src="<c:out value="${best.imageList[0].uploadPath}"/>/<c:out value="${best.imageList[0].fileName}"/>" alt="..." class="img-thumbnail">
 					<h5 style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><c:out value="${best.product_name}" /></h5>
 					<p>
@@ -195,10 +195,10 @@ $(document).ready(function(){
 	    			type : "post",
 	    			data: data,
 	    			success : function () {
-	    				alert("카트 담기 완료");
+	    				alert("장바구니 담기 완료");
 	    			},
 	    			error : function() {
-	    				alert("카트 담기 실패");
+	    				alert("장바구니 담기 실패");
 	    			}
 	    		});
 			}else {

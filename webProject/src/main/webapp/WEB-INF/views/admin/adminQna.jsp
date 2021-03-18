@@ -15,9 +15,9 @@
 
 <div class="container-fluid">
 	<div class="row">
-		<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+		<nav id="sidebarMenu" class="col-md-2 bg-light sidebar">
             <div class="position-sticky pt-3">
-              <ul class="nav flex-column">
+              <ul class="nav">
                 	<li class="nav-item"><a class="nav-link" href="/admin/adminProduct"> <span
 							data-feather="file"></span> 상품관리
 					</a></li>
@@ -38,8 +38,9 @@
 		<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 
 			<div class="row mb-2">
-				<h3>Q&A</h3>
-				<br>
+				<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+			        <h1 class="h2">QnA관리</h1>
+			     </div>
 				<div class="col-10">
 					<div class="table-responsive">
 						<table class="table table-striped table-sm">
@@ -58,7 +59,7 @@
 									<td><c:out value="${qna.qna_code}"/></td>
 									<td><a id="a_title" href="/admin/adminQnaGet?qna_code=<c:out value='${qna.qna_code}'/>" style=""><c:out value="${qna.qna_title}"/></a></td>
 									<td><c:out value="${qna.userid}"/></td>
-									<td><c:out value="${qna.qna_date}"/></td>
+									<td><fmt:formatDate value="${qna.qna_date}"/></td>
 									<c:choose>
 										<c:when test="${qna.qna_reply_ok}">
 											<td>YES</td>

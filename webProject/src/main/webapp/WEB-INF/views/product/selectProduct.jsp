@@ -4,25 +4,24 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ include file="../includes/header.jsp"%>
 
-    <div class="row d-flex justify-content-center">
+    <div class="row justify-content-center">
     <main class="col-md-10">
         <div class="row">
-        <div class="col-4 center-block">
+        	<p><a style="color: black; text-decoration:none; " href="/">🏠 </a> > <a style="color: black; text-decoration:none; " href="/product/list?product_ctgr=${selectedProduct.product_ctgr}"><c:out value="${selectedProduct.product_ctgr}"/></a></p>
+        <div class="col-6">
             <img class="img-thumbnail" alt="..." src="<c:out value="${selectedProduct.imageList[0].uploadPath}"/>/<c:out value="${selectedProduct.imageList[0].fileName}"/>">
         </div>
-        <div class="col-4 justify-content-end" >
+        <div class="col-6" >
             <div class="row">
-                <strong class="d-inline-block mb-2 text-primary"><c:out value="${selectedProduct.product_ctgr}"/></strong>
-                    <h3 class="mb-0"><c:out value="${selectedProduct.product_name}"/></h3>
-                    <div class="mb-1 text-muted"><fmt:formatNumber type="number" maxFractionDigits="3" value="${selectedProduct.product_price}" />원</div>
-                    <p class="card-text mb-auto"><c:out value="${selectedProduct.product_explain}"/></p>
-                   	
+                    <h4 class="mb-3"><c:out value="${selectedProduct.product_name}"/></h4>
+                    <br><hr/>
+                    <div class="mb-5 text-muted"><fmt:formatNumber type="number" maxFractionDigits="3" value="${selectedProduct.product_price}" />원</div>
             </div>
-            <br>
             <div class="row">
-            	수량 : &nbsp; <input type="text" id="stock" class="input-group mb-3" style="width: 60px;" value="1">
-                <p>
-                    <button type="button" id="btn_cart" class="btn btn-secondary">장바구니</button>
+            	<div class="col-sm">
+            		수량 : &nbsp; <input type="text" id="stock" class="input-group mb-3" style="width: 60px;" value="1">&nbsp;
+            		<p>
+                    <button type="button" id="btn_cart" class="btn btn-secondary">장바구니</button>&nbsp;
                     <a type="button" id="btn_order" class="btn btn-outline-dark">구매하기</a>
                     <script type="text/javascript">
                    
@@ -103,13 +102,19 @@
                 		});
                 	});
                     </script>
-                    
                 </p>
+            	</div>
             </div>
         </div>
     </div>
+    <hr/>
     <div class="row">
-    	<h3>상품 후기</h3><br>
+    	<h5>상세 정보</h5>
+    	<p class="card-text mb-auto"><c:out value="${selectedProduct.product_explain}"/></p>
+    </div>
+    <br/>
+    <div class="row">
+    	<h5>상품 후기</h5><br>
         <div class="col-10">
             <div class="table-responsive">
                 <table class="table table-striped table-sm">

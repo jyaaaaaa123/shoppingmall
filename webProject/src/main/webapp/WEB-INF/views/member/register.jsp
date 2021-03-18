@@ -11,7 +11,7 @@
     <link href="/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .container {
-        max-width: 765px;
+        max-width: 500px;
         }
     </style>
     <sec:csrfMetaTags/>
@@ -23,14 +23,14 @@
             <img class="d-block mx-auto mb-4" src="/resources/image/logo.png" alt="" width="72" height="57">
           </div>
       
-          <div class="row g-3">
+          <div class="row">
             
             <div class="col">
               <h4 class="mb-3">회원가입</h4>
               <form action="/member/register" method="post">
-                <div class="row g-3">
+                <div class="row">
+                	<label for="userId" class="form-label">아이디</label>
 				  <div class="col-12 input-group">
-                    <label for="userId" class="form-label">아이디</label>
                     <input type="text" class="form-control" id="userId" name="userid" placeholder="ID">
                     <div class="input-group-append">
                   		<button id="duplicate" class="btn btn-primary btn" type="button">아이디 중복 확인</button>

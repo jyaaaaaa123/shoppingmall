@@ -9,6 +9,8 @@
  a:link { color: black; text-decoration: none;}
  a:visited { color: black; text-decoration: none;}
  a:hover { color: red; text-decoration: underline;}
+ 
+ 
 </style>
 
 <%@ include file="../includes/header.jsp"%>

@@ -66,7 +66,7 @@
           <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
           <div class="checkbox mb-3">
             <label>
-              <input type="checkbox" value="remember-me"> Remember me
+              <input type="checkbox" name="remember-me"> 로그인 상태 유지
             </label>
           </div>
           <div>

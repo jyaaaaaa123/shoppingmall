@@ -5,10 +5,6 @@
 <%@ include file="../includes/header.jsp"%>
 <div class="container-fluid">
 	<div class="row">
-		<main class="col-md-10">
-			<div class="row">
-				<div class="col-4">
-					<div class="row">
 						<h3>장바구니</h3>
 					</div>
 					<br>
@@ -16,11 +12,11 @@
 						<c:if test="${empty cartList}">
 							<h5>상품이 없습니다</h5>
 						</c:if>
+						<c:set var="allPrice" value="0"/>
 						<c:forEach var="cart" items="${cartList}">
-							<div class="card card-body">
-							<div class="col-12">
+							<div class="col-md-3 mx-4 my-3 px-2 py-4 border">
+									<h5>상품명</h5>
 								<p>
-									상품명
 									<c:out value="${cart.product_name}" />
 								</p>
 								<p>
@@ -34,21 +30,24 @@
 								<p>
 									총 가격
 									<fmt:formatNumber type="number" maxFractionDigits="3" value="${cart.cart_stock * cart.product_price}" />원
+									<c:set var="allPrice" value="${allPrice + (cart.cart_stock * cart.product_price)}"/>
 								</p>
+								<div align="right">
 								<button type="button" class="btn btn-primary" id="deleteCart${cart.cart_code}">삭제</button>
-							</div>
-							<br>
+								</div>
 							</div>
 						</c:forEach>
-						<c:if test="${!empty cartList}">
-							<button type="button" class="btn btn-primary" id="order">결제하기</button>
-						</c:if>
-					</div>
-				</div>
+						
 			</div>
-		</main>
 	</div>
-</div>
+	<div class="row">
+		<c:if test="${!empty cartList}">
+		<div class="col-12 d-flex justify-content-end">
+			<h2>총 금액 : <fmt:formatNumber type="number" maxFractionDigits="3" value="${allPrice}"/>원</h2>&nbsp;
+			<button type="button" class="btn btn-primary" id="order">결제하기</button>
+		</div>
+		</c:if>
+	</div>
 
 <script type="text/javascript">
 	$("[id^=deleteCart]").click(function() {

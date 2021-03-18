@@ -32,7 +32,6 @@
 		WHERE auth.auth = 'ROLE_USER'
 	</select>
 	
-	
 	<select id="readUser" resultMap="memberMap">
 		SELECT
 			mem.userid, userpw, username, userphone, useremail, enabled, regdate, updatedate, auth
