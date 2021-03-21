@@ -125,6 +125,7 @@
 				success: function() {
 					alert("후기를 등록했습니다");
 					$(".modal").modal("hide");
+					window.location.reload();
 				},
 				error: function() {
 					alert("후기 등록에 실패했습니다");

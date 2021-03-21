@@ -139,6 +139,7 @@ $(document).ready(function(){
 		replyService.add(reply, function(result){
 			alert("등록 성공");
 			answerModal.modal("hide");
+			window.location.reload();
 		});
 	});
 });
