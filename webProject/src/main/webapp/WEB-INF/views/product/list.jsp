@@ -114,6 +114,7 @@
 
 <form id="pageForm" action="/product/list" method="get">
 	<input type="hidden" name="product_ctgr" value='${pageMaker.nowPage}'>
+	<input type="hidden" name="type" value='${pageMaker.cri.type}'>
 	<input type="hidden" name="pageNum" value='${pageMaker.cri.pageNum}'>
 	<input type="hidden" name="amount" value='${pageMaker.cri.amount}'>
 </form>
