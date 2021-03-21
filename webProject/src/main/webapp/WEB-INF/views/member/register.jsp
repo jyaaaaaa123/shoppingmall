@@ -41,11 +41,11 @@
             
             <div class="col">
               <h4 class="mb-3">회원가입</h4>
-              <form action="/member/register" method="post">
+              <form id="frm" action="/member/register" method="post">
                 <div class="row">
                 	<label for="userId" class="form-label">아이디</label>
 				  <div class="col-12 input-group">
-                    <input type="text" class="form-control" id="userId" name="userid" placeholder="ID">
+                    <input type="text" class="form-control" id="userId" name="userid" placeholder="Id">
                     <div class="input-group-append">
                   		<button id="duplicate" class="btn btn-primary btn" type="button">아이디 중복 확인</button>
                  	</div>
@@ -132,7 +132,7 @@
 			});
 		});
 		
-		$("#registSubmit").on("submit", function(e){
+		$("#registSubmit").click("submit", function(e){
 			e.preventDefault();
 			var id = $("#userId");
 			if(id.val() === '') {
@@ -179,8 +179,9 @@
 					alert("이메일을 입력해주세요");
 					email.focus();
 					return;
-				}
+				}	
 			}
+			$("#frm").submit();
 		});
 	});
 </script>       
