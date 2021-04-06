@@ -5,6 +5,7 @@
 ## 목차
 * 프로젝트 목적
 * 개발환경
+* 데이터베이스 모델링
 * 특징
 
 ## 프로젝트 목적
@@ -23,3 +24,12 @@
   > IDE
   * STS 3.9.13 RELEASE e4.16.0
   
+## 데이터베이스 모델링
+![image](https://user-images.githubusercontent.com/72846139/113666938-0167e880-96eb-11eb-940b-12e1f7c7c38d.png)
+
+## 특징
+### Front-End
+  >   ㅁㄴㅇ
+
+## 전체 시연 영상
+[![Video Label](http://img.youtube.com/vi/VyblxRh6Cqc/0.jpg)](https://youtu.be/VyblxRh6Cqc)
